@@ -132,7 +132,6 @@ Queries such as https://paritytech.github.io/substrate-api-sidecar/dist/
 ```
 curl -s http://0.0.0.0:8080/blocks/head | jq
 curl -s http://0.0.0.0:8080/accounts/22242423424242424242423424242342342424432424242423/staking-info?at=111 | jq
-curl -s http://0.0.0.0:8080/roaming/profiles/network-servers/service-profiles | jq
 curl -s http://0.0.0.0:8080/pallets/mining-speed-boost/rates/token-mining/count | jq
 curl -s http://0.0.0.0:8080/pallets/mining-speed-boost/rates/token-mining/1 | jq
 ```
