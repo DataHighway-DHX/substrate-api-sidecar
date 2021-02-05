@@ -1,9 +1,9 @@
-import { AnyJson } from '@polkadot/types/types';
+import { Codec } from '@polkadot/types/types';
 
 export interface IPalletMiningSpeedBoostRatesTokenMining {
-	object?: AnyJson | null;
+	hash?: string | Codec | null;
 }
 
 export interface IPalletMiningSpeedBoostRatesTokenMiningCount {
-	count?: string | null;
+	count?: string | Codec | null;
 }

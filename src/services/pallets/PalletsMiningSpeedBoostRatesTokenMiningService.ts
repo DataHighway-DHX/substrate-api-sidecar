@@ -7,27 +7,29 @@ import { AbstractService } from '../AbstractService';
 
 export class PalletsMiningSpeedBoostRatesTokenMiningService extends AbstractService {
 	async fetchPalletsMiningSpeedBoostRatesTokenMiningById(index: string): Promise<IPalletMiningSpeedBoostRatesTokenMining> {
-    console.log('this.api.query', this.api.query, index)
-		let object;
-		// try {
-		// 	object = await this.api.query.palletsMiningSpeedBoostRatesTokenMiningById(index);
-		// } catch {
-		// 	object = 'Cannot query palletsMiningSpeedBoostRatesTokenMiningById from node.';
-		// }
+		let hash;
+		try {
+			hash = await this.api.query
+				.dataHighwayMiningSpeedBoostRatesTokenMining
+				.miningSpeedBoostRatesTokenMinings(index);
+		} catch {
+			hash = 'Cannot query miningSpeedBoostRatesTokenMinings from node.';
+		}
 
 		return {
-			object
+			hash
 		};
   }
 
 	async fetchPalletsMiningSpeedBoostRatesTokenMiningCount(): Promise<IPalletMiningSpeedBoostRatesTokenMiningCount> {
-    console.log('this.api.query', this.api.query)
 		let count;
-		// try {
-		// 	count = await this.api.query.palletsMiningSpeedBoostRatesTokenMiningCount();
-		// } catch {
-		// 	count = 'Cannot query palletsMiningSpeedBoostRatesTokenMiningCount from node.';
-		// }
+		try {
+			count = await this.api.query
+				.dataHighwayMiningSpeedBoostRatesTokenMining
+				.miningSpeedBoostRatesTokenMiningCount();
+		} catch {
+			count = 'Cannot query miningSpeedBoostRatesTokenMiningCount from node.';
+		}
 
 		return {
 			count

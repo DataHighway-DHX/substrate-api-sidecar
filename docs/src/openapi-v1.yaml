@@ -628,8 +628,8 @@ paths:
     get:
       tags:
       - pallets
-      summary: Get a list of token mining rate objects stored for a specified tokenMiningRateId.
-      description: Returns a list of token mining rate objects stored for a specified tokenMiningRateId.
+      summary: Get the token mining rate hash that is stored to correspond to a specified token mining rate index.
+      description: Returns a token mining rate hash that is stored to correspond to a specified token mining rate index.
       parameters:
       - name: tokenMiningRateId
         in: path
@@ -643,12 +643,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                description: Array of tokenMiningRates.
+                type: string
+                description: token mining rate hash that is stored to correspond to a specific token mining rates index.
                 items:
                   $ref: '#/components/schemas/PalletStorage'
         "404":
-          description: could not find a list of token mining rate objects with the specified tokenMiningRateId
+          description: could not find a token mining rate hash value stored to correspond to the specified token mining rate index.
           content:
             application/json:
               schema:
@@ -657,8 +657,8 @@ paths:
     get:
       tags:
       - pallets
-      summary: Get the count of token mining rate objects in storage.
-      description: Returns the count of token mining rate objects in storage for use to determine the next tokenMiningRateId.
+      summary: Get the count of token mining rate indexes using storage.
+      description: Returns the count of token mining rate indexes using storage for use to determine the next token mining rate index.
       responses:
         "200":
           description: successful operation
@@ -666,7 +666,7 @@ paths:
             application/json:
               schema:
                 type: string
-                description: Count of tokenMiningRates.
+                description: Count of token mining rates indexes that have values in storage.
                 items:
                   $ref: '#/components/schemas/PalletMiningSpeedBoostRatesTokenMiningsCount'
   /pallets/{palletId}/storage:

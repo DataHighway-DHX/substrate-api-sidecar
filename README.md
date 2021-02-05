@@ -107,6 +107,8 @@ yarn
 
 Run a local DataHighway node in separate tab
 
+Ensure that in src/chains-config.index.ts the spec_name from the DataHighway repository's node runtime matches the name included in this file (e.g. `'datahighway': harbourTestnetControllers,`, where `'datahighway'` is the spec_name), otherwise it'll use the defaultController instead
+
 Swagger Docs
 ```
 cd docs/
