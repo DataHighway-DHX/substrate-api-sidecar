@@ -113,7 +113,11 @@ cd docs/
 yarn
 yarn build
 ```
-Go to https://paritytech.github.io/substrate-api-sidecar/dist/
+
+Open in browser this file (similar to https://paritytech.github.io/substrate-api-sidecar/dist/)
+```
+open -a "Google Chrome" ./docs/dist/index.html
+```
 
 Change the endpoint if necessary (e.g. `SAS_SUBSTRATE_WS_URL=ws://127.0.0.1:99441` in .env.local)
 ```
@@ -127,13 +131,13 @@ brew install jq
 ```
 or `yarn dev`
 
-Queries such as https://paritytech.github.io/substrate-api-sidecar/dist/
+Create queries using the endpoints that are added to the Swagger docs (mentioned above):
 
 ```
 curl -s http://0.0.0.0:8080/blocks/head | jq
 curl -s http://0.0.0.0:8080/accounts/22242423424242424242423424242342342424432424242423/staking-info?at=111 | jq
-curl -s http://0.0.0.0:8080/pallets/mining-speed-boost/rates/token-mining/count | jq
-curl -s http://0.0.0.0:8080/pallets/mining-speed-boost/rates/token-mining/1 | jq
+curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/count | jq
+curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/1 | jq
 ```
 
 ### Running

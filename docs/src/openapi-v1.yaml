@@ -624,7 +624,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RuntimeSpec'
-  /pallets/mining-speed-boost/rates/token-mining/{tokenMiningRateId}:
+  /pallets/mining/mining-speed-boost/rates/token-mining/{tokenMiningRateId}:
     get:
       tags:
       - pallets
@@ -653,7 +653,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /pallets/mining-speed-boost/rates/token-mining/count:
+  /pallets/mining/mining-speed-boost/rates/token-mining/count:
     get:
       tags:
       - pallets

@@ -7,7 +7,7 @@ import AbstractController from '../AbstractController';
 
 export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends AbstractController<PalletsMiningSpeedBoostRatesTokenMiningService> {
 	constructor(api: ApiPromise) {
-    super(api, '/pallets/mining-speed-boost/rates/token-mining',
+    super(api, '/pallets/mining/mining-speed-boost/rates/token-mining',
     new PalletsMiningSpeedBoostRatesTokenMiningService(api));
 		this.initRoutes();
 	}
