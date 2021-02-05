@@ -11,3 +11,7 @@ yarn-error.log
 /.clinic
 **.log
 **/logs
+
+/calc/pkg/calc.js
+/calc/pkg/calc_bg.wasm
+/docs/dist/app.bundle.js
