@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  title: Substrate API Sidecar v1.
-  description: Substrate API Sidecar is a REST service that makes it easy to
-    interact with blockchain nodes built using Substrate's FRAME framework.
+  title: DataHighway's Substrate API Sidecar v1.
+  description: DataHighway's Substrate API Sidecar is a REST service that makes it easy to
+    interact with DataHighway blockchain nodes built using Substrate's FRAME framework.
   contact:
     url: https://github.com/paritytech/substrate-api-sidecar
   license:
@@ -624,6 +624,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RuntimeSpec'
+  /pallets/mining-speed-boost/rates/token-mining/{tokenMiningRateId}:
+    get:
+      tags:
+      - pallets
+      summary: Get a list of token mining rate objects stored for a specified tokenMiningRateId.
+      description: Returns a list of token mining rate objects stored for a specified tokenMiningRateId.
+      parameters:
+      - name: tokenMiningRateId
+        in: path
+        description: 'Index query the storage with'
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of tokenMiningRates.
+                items:
+                  $ref: '#/components/schemas/PalletStorage'
+        "404":
+          description: could not find a list of token mining rate objects with the specified tokenMiningRateId
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /pallets/mining-speed-boost/rates/token-mining/count:
+    get:
+      tags:
+      - pallets
+      summary: Get the count of token mining rate objects in storage.
+      description: Returns the count of token mining rate objects in storage for use to determine the next tokenMiningRateId.
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Count of tokenMiningRates.
+                items:
+                  $ref: '#/components/schemas/PalletMiningSpeedBoostRatesTokenMiningsCount'
   /pallets/{palletId}/storage:
     get:
       tags:
@@ -1572,6 +1617,28 @@ components:
           type: string
         stack:
           type: string
+    PalletMiningSpeedBoostRatesTokenMinings:
+      type: array
+      properties:
+        miningSpeedBoostRatesTokenMinings:
+          type: object
+          items:
+            type: object
+            properties:
+              index:
+                type: string
+                format: hex
+                description: H256 hash of type opaque_blake2_256.
+              storageStruct:
+                type: object
+                format: hex
+                description: Storage struct of type [u8; 16].
+    PalletMiningSpeedBoostRatesTokenMiningsCount:
+      type: object
+      properties:
+        miningSpeedBoostRatesTokenMiningCount:
+          type: string
+          format: unsignedInteger
     PalletStorageType:
       type: object
       description: Info about the data structure used for storage.
