@@ -1,28 +1,28 @@
 import { ControllerConfig } from '../types/chains-config';
 
 /**
- * Controllers for Dock's mainnet.
+ * Controllers for harbour, DataHighway's test network.
  */
-export const dockMainnetControllers: ControllerConfig = {
+export const harbourTestnetControllers: ControllerConfig = {
 	controllers: {
 		Blocks: true,
 		BlocksExtrinsics: true,
-		AccountsStakingPayouts: false,
+		AccountsStakingPayouts: true,
 		AccountsBalanceInfo: true,
-		AccountsStakingInfo: false,
-		AccountsVestingInfo: false,
+		AccountsStakingInfo: true,
+		AccountsVestingInfo: true,
 		NodeNetwork: true,
 		NodeVersion: true,
-		NodeTransactionPool: true,
+    NodeTransactionPool: true,
 		RuntimeCode: true,
 		RuntimeSpec: true,
 		RuntimeMetadata: true,
 		TransactionDryRun: true,
 		TransactionMaterial: true,
 		TransactionFeeEstimate: true,
-		TransactionSubmit: true,
-		PalletsMiningSpeedBoostRatesTokenMining: false,
-		PalletsStakingProgress: false,
+    TransactionSubmit: true,
+    PalletsMiningSpeedBoostRatesTokenMining: true,
+		PalletsStakingProgress: true,
 		PalletsStorage: true,
 	},
 	options: {

@@ -59,6 +59,7 @@ async function main() {
 		api.rpc.system.chain(),
 		api.rpc.state.getRuntimeVersion(),
 	]);
+	console.log('specName: ', specName)
 
 	startUpPrompt(
 		config.SUBSTRATE.WS_URL,

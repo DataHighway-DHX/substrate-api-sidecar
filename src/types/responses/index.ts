@@ -12,6 +12,7 @@ export * from './NodeNetwork';
 export * from './NodeTransactionPool';
 export * from './NodeVersion';
 export * from './Pallet';
+export * from './PalletMiningSpeedBoostRatesTokenMining';
 export * from './PalletStakingProgress';
 export * from './PalletStorage';
 export * from './PalletStorageItem';

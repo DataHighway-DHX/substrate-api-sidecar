@@ -103,6 +103,45 @@ Use yarn to do the remaining setup:
 yarn
 ```
 
+### Quickstart
+
+Run a local DataHighway node in separate tab
+
+Ensure that in src/chains-config.index.ts the spec_name from the DataHighway repository's node runtime matches the name included in this file (e.g. `'datahighway': harbourTestnetControllers,`, where `'datahighway'` is the spec_name), otherwise it'll use the defaultController instead
+
+Swagger Docs
+```
+cd docs/
+yarn
+yarn build
+```
+
+Open in browser this file (similar to https://paritytech.github.io/substrate-api-sidecar/dist/)
+```
+open -a "Google Chrome" ./docs/dist/index.html
+```
+
+Change the endpoint if necessary (e.g. `SAS_SUBSTRATE_WS_URL=ws://127.0.0.1:99441` in .env.local)
+```
+export SAS_SUBSTRATE_TYPES=/Users/ls2/code/DataHighway-DHX/node/custom_types.json
+export SAS_LOG_LEVEL=silly
+export SAS_LOG_STRIP_ANSI=true
+CALC_DEBUG=1 sh calc/build.sh
+yarn build
+yarn start:log-rpc
+brew install jq
+```
+or `yarn dev`
+
+Create queries using the endpoints that are added to the Swagger docs (mentioned above):
+
+```
+curl -s http://0.0.0.0:8080/blocks/head | jq
+curl -s http://0.0.0.0:8080/accounts/22242423424242424242423424242342342424432424242423/staking-info?at=111 | jq
+curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/count | jq
+curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/1 | jq
+```
+
 ### Running
 
 ```bash
