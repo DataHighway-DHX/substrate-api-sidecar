@@ -3,7 +3,6 @@ import { RequestHandler } from 'express';
 
 import { PalletsMiningSpeedBoostRatesTokenMiningService } from '../../services';
 import { INumberParam, IPostRequestHandler, ITx } from '../../types/requests';
-import { } from '../../types/requests';
 import AbstractController from '../AbstractController';
 
 export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends AbstractController<PalletsMiningSpeedBoostRatesTokenMiningService> {
