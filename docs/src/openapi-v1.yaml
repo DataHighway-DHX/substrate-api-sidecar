@@ -12,6 +12,7 @@ info:
 tags:
 - name: accounts
 - name: blocks
+- name: mining
 - name: node
   description: node connected to sidecar
 - name: pallets
@@ -628,6 +629,7 @@ paths:
     get:
       tags:
       - pallets
+      - mining
       summary: Get the token mining rate hash that is stored to correspond to a specified token mining rate index.
       description: Returns a token mining rate hash that is stored to correspond to a specified token mining rate index.
       parameters:
@@ -646,6 +648,7 @@ paths:
                 type: string
                 description: token mining rate hash that is stored to correspond to a specific token mining rates index.
                 items:
+                  # FIXME - is this correct?
                   $ref: '#/components/schemas/PalletStorage'
         "404":
           description: could not find a token mining rate hash value stored to correspond to the specified token mining rate index.
@@ -657,6 +660,7 @@ paths:
     get:
       tags:
       - pallets
+      - mining
       summary: Get the count of token mining rate indexes using storage.
       description: Returns the count of token mining rate indexes using storage for use to determine the next token mining rate index.
       responses:
@@ -669,6 +673,30 @@ paths:
                 description: Count of token mining rates indexes that have values in storage.
                 items:
                   $ref: '#/components/schemas/PalletMiningSpeedBoostRatesTokenMiningsCount'
+  /pallets/mining/mining-speed-boost/rates/token-mining/create:
+    post:
+      tags:
+      - pallets
+      - mining
+      - transaction
+      summary: Create token mining rate object in storage by submitting a transaction to the node's transaction pool.
+      description: Accepts a valid signed extrinsic. Returns the hash of token mining rate object in storage.
+      operationId: submitTransaction
+      requestBody:
+        $ref: '#/components/requestBodies/Transaction'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSuccess'
+        "400":
+            description: failed to parse or submit transaction
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/TransactionFailure'
   /pallets/{palletId}/storage:
     get:
       tags:
@@ -1633,6 +1661,7 @@ components:
                 type: object
                 format: hex
                 description: Storage struct of type [u8; 16].
+    # FIXME - this is returning an object with a hash key and hash value instead
     PalletMiningSpeedBoostRatesTokenMiningsCount:
       type: object
       properties:
