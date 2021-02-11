@@ -2,7 +2,7 @@ import { ApiPromise } from '@polkadot/api';
 import { RequestHandler } from 'express';
 
 import { PalletsMiningSpeedBoostRatesTokenMiningService } from '../../services';
-import { INumberParam } from '../../types/requests';
+import { INumberParam, IPostRequestHandler, ITx } from '../../types/requests';
 import AbstractController from '../AbstractController';
 
 export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends AbstractController<PalletsMiningSpeedBoostRatesTokenMiningService> {
@@ -13,41 +13,69 @@ export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends 
 	}
 
 	protected initRoutes(): void {
+		// GET
 		this.safeMountAsyncGetHandlers([
-      ['/:index', this.getPalletsMiningSpeedBoostRatesTokenMiningById],
+			['/:index', this.getPalletsMiningSpeedBoostRatesTokenMiningById],
 			['/count', this.getPalletsMiningSpeedBoostRatesTokenMiningCount],
 		]);
+		// POST
+		this.router.post(
+			`${this.path}/create`,
+			PalletsMiningSpeedBoostRatesTokenMiningsController
+				.catchWrap(this.createPalletsMiningSpeedBoostRatesTokenMining)
+		);
 	}
   
 	/**
-	 * Get a MiningSpeedBoostRatesTokenMining by its index.
+	 * GET Get a MiningSpeedBoostRatesTokenMining by its index.
 	 *
 	 * @param req Express Request
 	 * @param res Express Response
 	 */
 	private getPalletsMiningSpeedBoostRatesTokenMiningById: RequestHandler<INumberParam> = async (
-    { params: { index } },
+    	{ params: { index } },
 		res
 	): Promise<void> => {
 		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(
 			res,
 			await this.service.fetchPalletsMiningSpeedBoostRatesTokenMiningById(index)
 		);
-  };
+  	};
 
-  /**
-	 * Get MiningSpeedBoostRatesTokenMining count.
+  	/**
+	 * GET Get MiningSpeedBoostRatesTokenMining count.
 	 *
 	 * @param req Express Request
 	 * @param res Express Response
 	 */
 	private getPalletsMiningSpeedBoostRatesTokenMiningCount: RequestHandler = async (
-    { query: { } },
+    	{ query: { } },
 		res
 	): Promise<void> => {
 		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(
 			res,
 			await this.service.fetchPalletsMiningSpeedBoostRatesTokenMiningCount()
+		);
+  	};
+
+	/**
+	 * POST Create a MiningSpeedBoostRatesTokenMining.
+	 *
+	 * @param req Express Request
+	 * @param res Express Response
+	 */
+	private createPalletsMiningSpeedBoostRatesTokenMining: IPostRequestHandler<ITx> = async (
+		{ body: { tx } },
+		res
+	): Promise<void> => {
+		if (!tx) {
+			throw {
+				error: 'Missing field `tx` on request body.',
+			};
+		}
+		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(
+			res,
+			await this.service.createPalletsMiningSpeedBoostRatesTokenMining(tx)
 		);
 	};
 }

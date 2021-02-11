@@ -134,6 +134,11 @@ brew install jq
 ```
 or `yarn dev`
 
+Lint the changes:
+```
+yarn run lint
+```
+
 Create queries using the endpoints that are added to the Swagger docs (mentioned above):
 
 To test block and account endpoints:
@@ -195,9 +200,21 @@ curl -s http://0.0.0.0:8080/pallets/democracy/storage/ReferendumInfoOf | jq
 ```
 
 To tests a mining endpoint
+
+Create a new token mining rate instance at https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fspreehafen.datahighway.com#/extrinsics. Uncheck "Sign and Submit", enter a Nonce that is larger than the last shown. click "Sign". Copy the unsigned transaction hash and paste below. Alternatively just sign the transaction and submit it there if you do not want to do it separately with cURL.
+
 ```
+curl -X POST "http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/create" \
+        -H  "accept: application/json" \
+        -H "Content-Type: application/json" \
+        -d '{"tx": "0xa101846c029e6fc41ec44d420030071f04995bac19e59a0f0a1a610f9f0f6d689e2262016c85c8b3f10b5442fe3162ed140f9b0fd865d7452c4bb96196932e940579cd6e1576d8360a2b895f2072bedc6cde66e1c0a67326d9d5883793a3a2baa131868f85011c001f00"}'
+```
+
+Check that it has been created.
+
+```
+curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/0 | jq
 curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/count | jq
-curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/1 | jq
 ```
 
 Note: The actual tx fee is larger than the estimated tx fee by ~0.6%, see [Actual vs Estimated Tx Fee](./TRANSACTION_FEE_COMPARE.md)
