@@ -28,7 +28,7 @@
     "build:docker": "docker build -t substrate-api-sidecar .",
     "build:docs": "(cd docs && yarn && yarn build)",
     "main": "node ./build/src/main.js",
-    "lint": "tsc && eslint . --ext ts",
+    "lint": "./node_modules/.bin/tsc && eslint . --ext ts",
     "deploy": "yarn build && standard-version",
     "start": "yarn run main",
     "start:log-rpc": "yarn run build && NODE_ENV=test yarn run main ",

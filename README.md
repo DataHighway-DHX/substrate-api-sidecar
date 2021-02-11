@@ -134,6 +134,11 @@ brew install jq
 ```
 or `yarn dev`
 
+Lint the changes:
+```
+yarn run lint
+```
+
 Create queries using the endpoints that are added to the Swagger docs (mentioned above):
 
 To test block and account endpoints:

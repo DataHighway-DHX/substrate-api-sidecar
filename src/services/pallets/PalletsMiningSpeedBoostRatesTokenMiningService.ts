@@ -1,9 +1,9 @@
 import {
-  IPalletMiningSpeedBoostRatesTokenMining,
+  	IPalletMiningSpeedBoostRatesTokenMining,
 } from 'src/types/responses';
 
 import { AbstractService } from '../AbstractService';
-import { extractCauseAndStack } from './extractCauseAndStack';
+import { extractCauseAndStack } from '../transaction/extractCauseAndStack';
 
 export class PalletsMiningSpeedBoostRatesTokenMiningService extends AbstractService {
 	async fetchPalletsMiningSpeedBoostRatesTokenMiningById(index: string): Promise<IPalletMiningSpeedBoostRatesTokenMining> {

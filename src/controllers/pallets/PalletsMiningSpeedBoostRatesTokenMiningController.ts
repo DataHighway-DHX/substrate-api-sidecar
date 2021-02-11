@@ -14,9 +14,9 @@ export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends 
 
 	protected initRoutes(): void {
 		this.safeMountAsyncGetHandlers([
-      ['/:index', this.getPalletsMiningSpeedBoostRatesTokenMiningById],
-      ['/count', this.getPalletsMiningSpeedBoostRatesTokenMiningCount],
-      ['/create', this.createPalletsMiningSpeedBoostRatesTokenMining],
+			['/:index', this.getPalletsMiningSpeedBoostRatesTokenMiningById],
+			['/count', this.getPalletsMiningSpeedBoostRatesTokenMiningCount],
+			['/create', this.createPalletsMiningSpeedBoostRatesTokenMining],
 		]);
 	}
   
@@ -27,32 +27,32 @@ export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends 
 	 * @param res Express Response
 	 */
 	private getPalletsMiningSpeedBoostRatesTokenMiningById: RequestHandler<INumberParam> = async (
-    { params: { index } },
+    	{ params: { index } },
 		res
 	): Promise<void> => {
 		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(
 			res,
 			await this.service.fetchPalletsMiningSpeedBoostRatesTokenMiningById(index)
 		);
-  };
+  	};
 
-  /**
+  	/**
 	 * Get MiningSpeedBoostRatesTokenMining count.
 	 *
 	 * @param req Express Request
 	 * @param res Express Response
 	 */
 	private getPalletsMiningSpeedBoostRatesTokenMiningCount: RequestHandler = async (
-    { query: { } },
+    	{ query: { } },
 		res
 	): Promise<void> => {
 		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(
 			res,
 			await this.service.fetchPalletsMiningSpeedBoostRatesTokenMiningCount()
 		);
-  };
+  	};
 
-  /**
+	/**
 	 * Create a MiningSpeedBoostRatesTokenMining.
 	 *
 	 * @param req Express Request
@@ -62,12 +62,11 @@ export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends 
 		{ body: { tx } },
 		res
 	): Promise<void> => {
-    console.log('blaghh')
 		if (!tx) {
 			throw {
 				error: 'Missing field `tx` on request body.',
 			};
-    }
+		}
 		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(
 			res,
 			await this.service.createPalletsMiningSpeedBoostRatesTokenMining(tx)
