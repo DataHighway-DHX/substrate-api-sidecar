@@ -6,7 +6,12 @@ import {
 } from './accounts';
 import { Blocks, BlocksExtrinsics } from './blocks';
 import { NodeNetwork, NodeTransactionPool, NodeVersion } from './node';
-import { PalletsMiningSpeedBoostRatesTokenMining, PalletsStakingProgress, PalletsStorage } from './pallets';
+import {
+	PalletsMiningSpeedBoostRatesTokenMining,
+	PalletsMiningSpeedBoostRatesHardwareMining,
+	PalletsStakingProgress,
+	PalletsStorage
+} from './pallets';
 import { RuntimeCode, RuntimeMetadata, RuntimeSpec } from './runtime';
 import {
 	TransactionDryRun,
@@ -26,6 +31,7 @@ export const controllers = {
 	AccountsVestingInfo,
 	AccountsStakingPayouts,
 	PalletsMiningSpeedBoostRatesTokenMining,
+	PalletsMiningSpeedBoostRatesHardwareMining,
 	PalletsStakingProgress,
 	PalletsStorage,
 	NodeNetwork,

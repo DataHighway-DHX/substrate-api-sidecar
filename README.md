@@ -199,7 +199,7 @@ curl -s http://0.0.0.0:8080/pallets/democracy/storage/ | jq
 curl -s http://0.0.0.0:8080/pallets/democracy/storage/ReferendumInfoOf | jq
 ```
 
-To tests a mining endpoint
+To tests a **token mining** endpoint
 
 Create a new token mining rate instance at https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fspreehafen.datahighway.com#/extrinsics. Uncheck "Sign and Submit", enter a Nonce that is larger than the last shown. click "Sign". Copy the unsigned transaction hash and paste below. Alternatively just sign the transaction and submit it there if you do not want to do it separately with cURL.
 
@@ -215,6 +215,17 @@ Check that it has been created.
 ```
 curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/0 | jq
 curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/count | jq
+```
+
+To test a **hardware mining** endpoint
+
+```
+curl -X POST "http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/create" \
+        -H  "accept: application/json" \
+        -H "Content-Type: application/json" \
+        -d '{"tx": "0xa101846c029e6fc41ec44d420030071f04995bac19e59a0f0a1a610f9f0f6d689e226201aa132d39f8b7348c61e731ac255b6a65be6495d11029b186f64cc6ba85c263373b8ee379288fe0c747eb11a461c710c2683d939353ca6baef6415513bde18587750224002000"}'
+
+curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/0 | jq
 ```
 
 Note: The actual tx fee is larger than the estimated tx fee by ~0.6%, see [Actual vs Estimated Tx Fee](./TRANSACTION_FEE_COMPARE.md)

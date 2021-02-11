@@ -23,6 +23,7 @@ export const defaultControllers: ControllerConfig = {
 		TransactionFeeEstimate: true,
 		TransactionSubmit: true,
 		PalletsMiningSpeedBoostRatesTokenMining: true,
+		PalletsMiningSpeedBoostRatesHardwareMining: true,
 		PalletsStakingProgress: true,
 		PalletsStorage: true,
 	},
