@@ -672,7 +672,7 @@ paths:
                 type: string
                 description: Count of token mining rates indexes that have values in storage.
                 items:
-                  $ref: '#/components/schemas/PalletMiningSpeedBoostRatesTokenMiningsCount'
+                  $ref: '#/components/schemas/PalletMiningSpeedBoostRatesMiningsCount'
   /pallets/mining/mining-speed-boost/rates/token-mining/create:
     post:
       tags:
@@ -681,6 +681,78 @@ paths:
       - transaction
       summary: Create token mining rate object in storage by submitting a transaction to the node's transaction pool.
       description: Accepts a valid signed extrinsic. Returns the hash of token mining rate object in storage.
+      operationId: submitTransaction
+      requestBody:
+        $ref: '#/components/requestBodies/Transaction'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSuccess'
+        "400":
+            description: failed to parse or submit transaction
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/TransactionFailure'
+  /pallets/mining/mining-speed-boost/rates/hardware-mining/{hardwareMiningRateId}:
+    get:
+      tags:
+      - pallets
+      - mining
+      summary: Get the hardware mining rate hash that is stored to correspond to a specified hardware mining rate index.
+      description: Returns a hardware mining rate hash that is stored to correspond to a specified hardware mining rate index.
+      parameters:
+      - name: hardwareMiningRateId
+        in: path
+        description: 'Index query the storage with'
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: hardware mining rate hash that is stored to correspond to a specific hardware mining rates index.
+                items:
+                  # FIXME - is this correct?
+                  $ref: '#/components/schemas/PalletStorage'
+        "404":
+          description: could not find a hardware mining rate hash value stored to correspond to the specified hardware mining rate index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /pallets/mining/mining-speed-boost/rates/hardware-mining/count:
+    get:
+      tags:
+      - pallets
+      - mining
+      summary: Get the count of hardware mining rate indexes using storage.
+      description: Returns the count of hardware mining rate indexes using storage for use to determine the next hardware mining rate index.
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Count of hardware mining rates indexes that have values in storage.
+                items:
+                  $ref: '#/components/schemas/PalletMiningSpeedBoostRatesMiningsCount'
+  /pallets/mining/mining-speed-boost/rates/hardware-mining/create:
+    post:
+      tags:
+      - pallets
+      - mining
+      - transaction
+      summary: Create hardware mining rate object in storage by submitting a transaction to the node's transaction pool.
+      description: Accepts a valid signed extrinsic. Returns the hash of hardware mining rate object in storage.
       operationId: submitTransaction
       requestBody:
         $ref: '#/components/requestBodies/Transaction'
@@ -1662,10 +1734,10 @@ components:
                 format: hex
                 description: Storage struct of type [u8; 16].
     # FIXME - this is returning an object with a hash key and hash value instead
-    PalletMiningSpeedBoostRatesTokenMiningsCount:
+    PalletMiningSpeedBoostRatesMiningsCount:
       type: object
       properties:
-        miningSpeedBoostRatesTokenMiningCount:
+        miningSpeedBoostRatesMiningCount:
           type: string
           format: unsignedInteger
     PalletStorageType:

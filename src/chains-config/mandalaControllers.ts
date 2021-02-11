@@ -22,6 +22,7 @@ export const mandalaControllers: ControllerConfig = {
 		TransactionFeeEstimate: true,
 		TransactionSubmit: true,
 		PalletsMiningSpeedBoostRatesTokenMining: false,
+		PalletsMiningSpeedBoostRatesHardwareMining: false,
 		PalletsStakingProgress: true,
 		PalletsStorage: true,
 	},

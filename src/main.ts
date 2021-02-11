@@ -119,6 +119,7 @@ function startUpPrompt(wsUrl: string, chainName: string, implName: string) {
 		'wss://rpc.plasmnet.io/',
 		'wss://mainnet-rpc.stafi.io',
 		'wss://rpc.subsocial.network',
+		'wss://spreehafen.datahighway.com', // DataHighway Standalone Testnet
 	];
 
 	logger.info(
