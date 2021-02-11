@@ -13,15 +13,21 @@ export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends 
 	}
 
 	protected initRoutes(): void {
+		// GET
 		this.safeMountAsyncGetHandlers([
 			['/:index', this.getPalletsMiningSpeedBoostRatesTokenMiningById],
 			['/count', this.getPalletsMiningSpeedBoostRatesTokenMiningCount],
-			['/create', this.createPalletsMiningSpeedBoostRatesTokenMining],
 		]);
+		// POST
+		this.router.post(
+			`${this.path}/create`,
+			PalletsMiningSpeedBoostRatesTokenMiningsController
+				.catchWrap(this.createPalletsMiningSpeedBoostRatesTokenMining)
+		);
 	}
   
 	/**
-	 * Get a MiningSpeedBoostRatesTokenMining by its index.
+	 * GET Get a MiningSpeedBoostRatesTokenMining by its index.
 	 *
 	 * @param req Express Request
 	 * @param res Express Response
@@ -37,7 +43,7 @@ export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends 
   	};
 
   	/**
-	 * Get MiningSpeedBoostRatesTokenMining count.
+	 * GET Get MiningSpeedBoostRatesTokenMining count.
 	 *
 	 * @param req Express Request
 	 * @param res Express Response
@@ -53,7 +59,7 @@ export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends 
   	};
 
 	/**
-	 * Create a MiningSpeedBoostRatesTokenMining.
+	 * POST Create a MiningSpeedBoostRatesTokenMining.
 	 *
 	 * @param req Express Request
 	 * @param res Express Response
