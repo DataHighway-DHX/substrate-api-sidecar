@@ -121,8 +121,9 @@ Open in browser this file (similar to https://paritytech.github.io/substrate-api
 open -a "Google Chrome" ./docs/dist/index.html
 ```
 
-Change the endpoint if necessary (e.g. `SAS_SUBSTRATE_WS_URL=ws://127.0.0.1:99441` in .env.local)
+Change the endpoint if necessary (e.g. `SAS_SUBSTRATE_WS_URL=ws://127.0.0.1:9944` or `SAS_SUBSTRATE_WS_URL=wss://spreehafen.datahighway.com` (standalone testnet) in .env.local)
 ```
+export SAS_SUBSTRATE_WS_URL=wss://spreehafen.datahighway.com
 export SAS_SUBSTRATE_TYPES=/Users/ls2/code/DataHighway-DHX/node/custom_types.json
 export SAS_LOG_LEVEL=silly
 export SAS_LOG_STRIP_ANSI=true
@@ -135,12 +136,71 @@ or `yarn dev`
 
 Create queries using the endpoints that are added to the Swagger docs (mentioned above):
 
+To test block and account endpoints:
+
 ```
 curl -s http://0.0.0.0:8080/blocks/head | jq
-curl -s http://0.0.0.0:8080/accounts/22242423424242424242423424242342342424432424242423/staking-info?at=111 | jq
+curl -s http://0.0.0.0:8080/blocks/1 | jq 
+# Alice
+curl -s http://0.0.0.0:8080/accounts/5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY/balance-info\ | jq
+# DHX DAO
+curl -s http://0.0.0.0:8080/accounts/5EWKojw2i3uoqfWx1dEgVjBsvK5xuTr5G3NjXYh47H6ycBWr/balance-info\ | jq
+```
+
+To test transaction endpoints:
+
+Note: Use polkadot.js apps to make a transaction but unselect sign & send so it gives the unsigned extrinsic to add below:
+
+```
+curl -X POST "http://0.0.0.0:8080/transaction/fee-estimate" \
+        -H  "accept: application/json" \
+        -H "Content-Type: application/json" \
+        -d '{"tx": "0x4502846c029e6fc41ec44d420030071f04995bac19e59a0f0a1a610f9f0f6d689e2262014c07390bdca66d30586819dfaed8a2741dcc1de35415387573d1ca115780b4677630e1651702a04e6c17ba286a349d950737c208db94b08f4bfb2f04f0f8ab8a0501140006006c029e6fc41ec44d420030071f04995bac19e59a0f0a1a610f9f0f6d689e226213000064a7b3b6e00d"}'
+
+{"weight":"190949000","class":"Normal","partialFee":"125000147"}
+```
+
+```
+curl -X POST "http://0.0.0.0:8080/transaction" \
+        -H  "accept: application/json" \
+        -H "Content-Type: application/json" \
+        -d '{"tx": "0x4502846c029e6fc41ec44d420030071f04995bac19e59a0f0a1a610f9f0f6d689e2262011e0adc21437dce05a45d918caf86a6ba49c1b70f9eba0614e87da638f535977b09bb22bbf36364681bcaa8028f578653d771d3c0699db448edd195d9848c51854500080006006c029e6fc41ec44d420030071f04995bac19e59a0f0a1a610f9f0f6d689e226213000064a7b3b6e00d"}'
+
+{"hash":"0x4d40886dc0e833dcbe09ef27fc35ef608b84db304100723d261e1b0eb0a5e88e"}
+```
+
+```
+curl -X GET "http://0.0.0.0:8080/transaction/material?at=1" -H  "accept: application/json" | jq
+
+{
+  "at": {
+    "hash": "0x79e15278d3f46dd83becfd41c9e1e6ef97a35c5ae5e3de532226eccc8699fe36",
+    "height": "1"
+  },
+  "genesisHash": "0xc9749948729cb3a9bdb0e9985fbc77625c0bf919ca9a951821a9317e1223ddba",
+  "chainName": "DataHighway Harbour Testnet",
+  "specName": "datahighway",
+  "specVersion": "1",
+  "txVersion": "1",
+  "metadata": "0x6
+}
+```
+
+To list all storage of an endpoint `/pallets/:palletId/storage/` and to query the storage id of any pallet, `/pallets/:palletId/storage/:storageItemId"`
+
+Specifically to test this storage endpoint of the democracy module (but it needs to be implemented in the DataHighway chain itself first)
+```
+curl -s http://0.0.0.0:8080/pallets/democracy/storage/ | jq
+curl -s http://0.0.0.0:8080/pallets/democracy/storage/ReferendumInfoOf | jq
+```
+
+To tests a mining endpoint
+```
 curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/count | jq
 curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/1 | jq
 ```
+
+Note: The actual tx fee is larger than the estimated tx fee by ~0.6%, see [Actual vs Estimated Tx Fee](./TRANSACTION_FEE_COMPARE.md)
 
 ### Running
 
