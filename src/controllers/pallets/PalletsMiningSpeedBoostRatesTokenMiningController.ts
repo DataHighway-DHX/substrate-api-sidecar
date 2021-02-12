@@ -7,8 +7,8 @@ import AbstractController from '../AbstractController';
 
 export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends AbstractController<PalletsMiningSpeedBoostRatesTokenMiningService> {
 	constructor(api: ApiPromise) {
-    super(api, '/pallets/mining/mining-speed-boost/rates/token-mining',
-    new PalletsMiningSpeedBoostRatesTokenMiningService(api));
+		super(api, '/pallets/mining/mining-speed-boost/rates/token-mining',
+		new PalletsMiningSpeedBoostRatesTokenMiningService(api));
 		this.initRoutes();
 	}
 
@@ -54,7 +54,7 @@ export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends 
 	 * @param res Express Response
 	 */
 	private getPalletsMiningSpeedBoostRatesTokenMiningById: RequestHandler<INumberParam> = async (
-    	{ params: { index } },
+		{ params: { index } },
 		res
 	): Promise<void> => {
 		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(
@@ -70,7 +70,7 @@ export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends 
 	 * @param res Express Response
 	 */
 	private getPalletsMiningSpeedBoostRatesTokenMiningCount: RequestHandler = async (
-    	{ query: { } },
+		{ query: { } },
 		res
 	): Promise<void> => {
 		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(

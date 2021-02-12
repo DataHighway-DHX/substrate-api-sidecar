@@ -20,7 +20,7 @@ export class PalletsMiningSpeedBoostRatesHardwareMiningService extends AbstractS
 		return {
 			hash
 		};
-  	}
+	}
 
 	async fetchPalletsMiningSpeedBoostRatesHardwareMiningCount(): Promise<IPalletMiningSpeedBoostRatesHardwareMining> {
 		let hash;
