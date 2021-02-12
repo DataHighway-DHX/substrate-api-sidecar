@@ -207,13 +207,13 @@ Create a new token mining rate instance at https://polkadot.js.org/apps/?rpc=wss
 curl -X POST "http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/create" \
         -H  "accept: application/json" \
         -H "Content-Type: application/json" \
-        -d '{"tx": "0xa101846c029e6fc41ec44d420030071f04995bac19e59a0f0a1a610f9f0f6d689e2262016c85c8b3f10b5442fe3162ed140f9b0fd865d7452c4bb96196932e940579cd6e1576d8360a2b895f2072bedc6cde66e1c0a67326d9d5883793a3a2baa131868f85011c001f00"}'
+        -d '{"tx": "<UNSIGNED_TX>"}'
 ```
 
 Check that it has been created.
 
 ```
-curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/0 | jq
+curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/0/show | jq
 curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/token-mining/count | jq
 ```
 
@@ -223,22 +223,25 @@ To test a **hardware mining** endpoint
 curl -X POST "http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/create" \
         -H  "accept: application/json" \
         -H "Content-Type: application/json" \
-        -d '{"tx": "0xa101846c029e6fc41ec44d420030071f04995bac19e59a0f0a1a610f9f0f6d689e226201aa132d39f8b7348c61e731ac255b6a65be6495d11029b186f64cc6ba85c263373b8ee379288fe0c747eb11a461c710c2683d939353ca6baef6415513bde18587750224002000"}'
+        -d '{"tx": "<UNSIGNED_TX>"}'
 
-curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/0 | jq
+curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/0/show | jq
 ```
 
-Now create a "config" for the new token mining rate at https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fspreehafen.datahighway.com#/extrinsics. Uncheck "Sign and Submit", enter a Nonce that is larger than the last shown. click "Sign". Copy the unsigned transaction hash and paste below. Alternatively just sign the transaction and submit it there if you do not want to do it separately with cURL.
+Now create a "config" for the new token mining rate at https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fspreehafen.datahighway.com#/extrinsics. There is only one "config" per mining rate object. Uncheck "Sign and Submit", enter a Nonce that is larger than the last shown. click "Sign". Copy the unsigned transaction hash and paste below. Alternatively just sign the transaction and submit it there if you do not want to do it separately with cURL.
 
 ```
-curl -X POST "http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/0/configs/create" \
+curl -X POST "http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/0/config/create" \
         -H  "accept: application/json" \
         -H "Content-Type: application/json" \
-        -d '{"tx": "0xfd01846c029e6fc41ec44d420030071f04995bac19e59a0f0a1a610f9f0f6d689e2262018a849860bba75e7ae49f93bc37bb6ce04446097a3603fca4a75db0c274a66e7cc2951c4ce2953082c586d3d8570e1ead1a7ac54c10cd70470ea83329c052138755022c0020020000000000000000010200000001010000000101000000"}'
+        -d '{"tx": "<UNSIGNED_TX>"}'
+```
 
-curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/0/config | jq
+Specify as a URL parameter the mining rate object id that the "config" belongs to, which you want to query.
+```
+curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/0/config/show | jq
 
-// terminal output
+// terminal output example
 {
   "hash": {
     "hardware_hardware_secure": "2",

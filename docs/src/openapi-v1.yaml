@@ -625,54 +625,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RuntimeSpec'
-  /pallets/mining/mining-speed-boost/rates/token-mining/{tokenMiningRateId}:
-    get:
-      tags:
-      - pallets
-      - mining
-      summary: Get the token mining rate hash that is stored to correspond to a specified token mining rate index.
-      description: Returns a token mining rate hash that is stored to correspond to a specified token mining rate index.
-      parameters:
-      - name: tokenMiningRateId
-        in: path
-        description: 'Index query the storage with'
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: string
-                description: token mining rate hash that is stored to correspond to a specific token mining rates index.
-                items:
-                  # FIXME - is this correct?
-                  $ref: '#/components/schemas/PalletStorage'
-        "404":
-          description: could not find a token mining rate hash value stored to correspond to the specified token mining rate index.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /pallets/mining/mining-speed-boost/rates/token-mining/count:
-    get:
-      tags:
-      - pallets
-      - mining
-      summary: Get the count of token mining rate indexes using storage.
-      description: Returns the count of token mining rate indexes using storage for use to determine the next token mining rate index.
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: string
-                description: Count of token mining rates indexes that have values in storage.
-                items:
-                  $ref: '#/components/schemas/PalletMiningSpeedBoostRatesMiningsCount'
   /pallets/mining/mining-speed-boost/rates/token-mining/create:
     post:
       tags:
@@ -697,15 +649,15 @@ paths:
               application/json:
                 schema:
                   $ref: '#/components/schemas/TransactionFailure'
-  /pallets/mining/mining-speed-boost/rates/hardware-mining/{hardwareMiningRateId}:
+  /pallets/mining/mining-speed-boost/rates/token-mining/{tokenMiningRateId}/show:
     get:
       tags:
       - pallets
       - mining
-      summary: Get the hardware mining rate hash that is stored to correspond to a specified hardware mining rate index.
-      description: Returns a hardware mining rate hash that is stored to correspond to a specified hardware mining rate index.
+      summary: Get the token mining rate hash that is stored to correspond to a specified token mining rate index.
+      description: Returns a token mining rate hash that is stored to correspond to a specified token mining rate index.
       parameters:
-      - name: hardwareMiningRateId
+      - name: tokenMiningRateId
         in: path
         description: 'Index query the storage with'
         required: true
@@ -718,23 +670,22 @@ paths:
             application/json:
               schema:
                 type: string
-                description: hardware mining rate hash that is stored to correspond to a specific hardware mining rates index.
+                description: token mining rate hash that is stored to correspond to a specific token mining rates index.
                 items:
-                  # FIXME - is this correct?
                   $ref: '#/components/schemas/PalletStorage'
         "404":
-          description: could not find a hardware mining rate hash value stored to correspond to the specified hardware mining rate index.
+          description: could not find a token mining rate hash value stored to correspond to the specified token mining rate index.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /pallets/mining/mining-speed-boost/rates/hardware-mining/count:
+  /pallets/mining/mining-speed-boost/rates/token-mining/count:
     get:
       tags:
       - pallets
       - mining
-      summary: Get the count of hardware mining rate indexes using storage.
-      description: Returns the count of hardware mining rate indexes using storage for use to determine the next hardware mining rate index.
+      summary: Get the count of token mining rate indexes using storage.
+      description: Returns the count of token mining rate indexes using storage for use to determine the next token mining rate index.
       responses:
         "200":
           description: successful operation
@@ -742,7 +693,7 @@ paths:
             application/json:
               schema:
                 type: string
-                description: Count of hardware mining rates indexes that have values in storage.
+                description: Count of token mining rates indexes that have values in storage.
                 items:
                   $ref: '#/components/schemas/PalletMiningSpeedBoostRatesMiningsCount'
   /pallets/mining/mining-speed-boost/rates/hardware-mining/create:
@@ -769,6 +720,114 @@ paths:
               application/json:
                 schema:
                   $ref: '#/components/schemas/TransactionFailure'
+  /pallets/mining/mining-speed-boost/rates/hardware-mining/{hardwareMiningRateId}/show:
+    get:
+      tags:
+      - pallets
+      - mining
+      summary: Get the hardware mining rate hash that is stored to correspond to a specified hardware mining rate index.
+      description: Returns a hardware mining rate hash that is stored to correspond to a specified hardware mining rate index.
+      parameters:
+      - name: hardwareMiningRateId
+        in: path
+        description: 'Index query the storage with'
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: hardware mining rate hash that is stored to correspond to a specific hardware mining rates index.
+                items:
+                  $ref: '#/components/schemas/PalletStorage'
+        "404":
+          description: could not find a hardware mining rate hash value stored to correspond to the specified hardware mining rate index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /pallets/mining/mining-speed-boost/rates/hardware-mining/count:
+    get:
+      tags:
+      - pallets
+      - mining
+      summary: Get the count of hardware mining rate indexes that are kept in storage.
+      description: Returns the count of hardware mining rate indexes that are kept in storage for use to determine the next hardware mining rate index.
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Count of hardware mining rates indexes that have values in storage.
+                items:
+                  $ref: '#/components/schemas/PalletMiningSpeedBoostRatesMiningsCount'
+  /pallets/mining/mining-speed-boost/rates/hardware-mining/{hardwareMiningRateId}/config/create:
+    post:
+      tags:
+      - pallets
+      - mining
+      - transaction
+      summary: Create a "config" object that belongs to a hardware mining rate object in storage by submitting a transaction to the node's transaction pool.
+      description: Accepts a valid signed extrinsic. Returns the hash of hardware mining rate object in storage.
+      parameters:
+      - name: hardwareMiningRateId
+        in: path
+        description: 'Index query the storage with'
+        required: true
+        schema:
+          type: stringoperationId: submitTransaction
+      requestBody:
+        $ref: '#/components/requestBodies/Transaction'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSuccess'
+        "400":
+            description: failed to parse or submit transaction
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/TransactionFailure'
+  /pallets/mining/mining-speed-boost/rates/hardware-mining/{hardwareMiningRateId}/config/show:
+    get:
+      tags:
+      - pallets
+      - mining
+      summary: Get the "config" associated a specified hardware mining rate index.
+      description: Returns a hardware mining rate "config" that is stored to correspond to a specified hardware mining rate index.
+      parameters:
+      - name: hardwareMiningRateId
+        in: path
+        description: 'Index query the storage with'
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: hardware mining rate "config" that is stored to correspond to a specific hardware mining rates index.
+                items:
+                  # FIXME - change to response stucture of MiningSpeedBoostRatesHardwareMiningRatesConfig
+                  $ref: '#/components/schemas/PalletStorage'
+        "404":
+          description: could not find a hardware mining rate hash value stored to correspond to the specified hardware mining rate index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /pallets/{palletId}/storage:
     get:
       tags:

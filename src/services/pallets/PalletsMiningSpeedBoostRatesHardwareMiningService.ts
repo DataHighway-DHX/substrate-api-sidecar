@@ -84,9 +84,7 @@ export class PalletsMiningSpeedBoostRatesHardwareMiningService extends AbstractS
 	 *
 	 * @param extrinsic scale encoded extrinsic to submit
 	 */
-	async createConfigPalletsMiningSpeedBoostRatesHardwareMiningForId(args: string): Promise<any> {
-		console.log('args', args)
-		
+	async createConfigPalletsMiningSpeedBoostRatesHardwareMining(args: string): Promise<any> {
 		const { api } = this;
 
 		let tx;

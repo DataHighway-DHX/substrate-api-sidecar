@@ -15,9 +15,9 @@ export default class PalletsMiningSpeedBoostRatesHardwareMiningsController exten
 	protected initRoutes(): void {
 		// GET
 		this.safeMountAsyncGetHandlers([
-			['/:index', this.getPalletsMiningSpeedBoostRatesHardwareMiningById],
+			['/:index/show', this.getPalletsMiningSpeedBoostRatesHardwareMiningById],
 			['/count', this.getPalletsMiningSpeedBoostRatesHardwareMiningCount],
-			['/:index/config', this.getPalletsMiningSpeedBoostRatesHardwareMiningConfigById],
+			['/:index/config/show', this.getPalletsMiningSpeedBoostRatesHardwareMiningConfigById],
 		]);
 		// POST
 		this.router.post(
@@ -26,12 +26,33 @@ export default class PalletsMiningSpeedBoostRatesHardwareMiningsController exten
 				.catchWrap(this.createPalletsMiningSpeedBoostRatesHardwareMining)
 		);
 		this.router.post(
-			`${this.path}/:index/configs/create`,
+			`${this.path}/:index/config/create`,
 			PalletsMiningSpeedBoostRatesHardwareMiningsController
-				.catchWrap(this.createConfigPalletsMiningSpeedBoostRatesHardwareMiningForId)
+				.catchWrap(this.createConfigPalletsMiningSpeedBoostRatesHardwareMining)
 		);
 	}
-  
+
+	/**
+	 * POST Create a MiningSpeedBoostRatesHardwareMining.
+	 *
+	 * @param req Express Request
+	 * @param res Express Response
+	 */
+	private createPalletsMiningSpeedBoostRatesHardwareMining: IPostRequestHandler<ITx> = async (
+		{ body: { tx } },
+		res
+	): Promise<void> => {
+		if (!tx) {
+			throw {
+				error: 'Missing field `tx` on request body.',
+			};
+		}
+		PalletsMiningSpeedBoostRatesHardwareMiningsController.sanitizedSend(
+			res,
+			await this.service.createPalletsMiningSpeedBoostRatesHardwareMining(tx)
+		);
+	};
+
 	/**
 	 * GET Get a MiningSpeedBoostRatesHardwareMining by its index.
 	 *
@@ -62,27 +83,6 @@ export default class PalletsMiningSpeedBoostRatesHardwareMiningsController exten
 			res,
 			await this.service.fetchPalletsMiningSpeedBoostRatesHardwareMiningCount()
 		);
-	  };
-
-	/**
-	 * POST Create a MiningSpeedBoostRatesHardwareMining.
-	 *
-	 * @param req Express Request
-	 * @param res Express Response
-	 */
-	private createPalletsMiningSpeedBoostRatesHardwareMining: IPostRequestHandler<ITx> = async (
-		{ body: { tx } },
-		res
-	): Promise<void> => {
-		if (!tx) {
-			throw {
-				error: 'Missing field `tx` on request body.',
-			};
-		}
-		PalletsMiningSpeedBoostRatesHardwareMiningsController.sanitizedSend(
-			res,
-			await this.service.createPalletsMiningSpeedBoostRatesHardwareMining(tx)
-		);
 	};
 
 	/**
@@ -91,8 +91,8 @@ export default class PalletsMiningSpeedBoostRatesHardwareMiningsController exten
 	 * @param req Express Request
 	 * @param res Express Response
 	 */
-	private createConfigPalletsMiningSpeedBoostRatesHardwareMiningForId: IPostRequestHandler<ITx> = async (
-		{ body: { tx }, params: { } },
+	private createConfigPalletsMiningSpeedBoostRatesHardwareMining: IPostRequestHandler<ITx> = async (
+		{ body: { tx } },
 		res
 	): Promise<void> => {
 		if (!tx) {
@@ -104,7 +104,7 @@ export default class PalletsMiningSpeedBoostRatesHardwareMiningsController exten
 
 		PalletsMiningSpeedBoostRatesHardwareMiningsController.sanitizedSend(
 			res,
-			await this.service.createConfigPalletsMiningSpeedBoostRatesHardwareMiningForId(tx)
+			await this.service.createConfigPalletsMiningSpeedBoostRatesHardwareMining(tx)
 		);
 	};
 
