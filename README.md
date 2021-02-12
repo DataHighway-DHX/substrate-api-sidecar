@@ -247,9 +247,9 @@ curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-min
     "hardware_hardware_secure": "2",
     "hardware_hardware_insecure": "1.5",
     "hardware_max_hardware": "1.25",
-    "hardware_hardware_secure_max_token_bonus_per_gateway": "1000000",
-    "hardware_hardware_secure_max_token_bonus_per_gateway": "500000",
-    "hardware_hardware_secure_max_token_bonus_per_gateway": "250000",
+    "hardware_category_1_max_token_bonus_per_gateway": "1000000",
+    "hardware_category_2_max_token_bonus_per_gateway": "500000",
+    "hardware_category_3_max_token_bonus_per_gateway": "250000",
   }
 }
 ```
