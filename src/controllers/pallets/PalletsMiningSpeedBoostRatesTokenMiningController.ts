@@ -15,7 +15,7 @@ export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends 
 	protected initRoutes(): void {
 		// GET
 		this.safeMountAsyncGetHandlers([
-			['/:index', this.getPalletsMiningSpeedBoostRatesTokenMiningById],
+			['/:index/show', this.getPalletsMiningSpeedBoostRatesTokenMiningById],
 			['/count', this.getPalletsMiningSpeedBoostRatesTokenMiningCount],
 		]);
 		// POST
@@ -25,38 +25,6 @@ export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends 
 				.catchWrap(this.createPalletsMiningSpeedBoostRatesTokenMining)
 		);
 	}
-  
-	/**
-	 * GET Get a MiningSpeedBoostRatesTokenMining by its index.
-	 *
-	 * @param req Express Request
-	 * @param res Express Response
-	 */
-	private getPalletsMiningSpeedBoostRatesTokenMiningById: RequestHandler<INumberParam> = async (
-    	{ params: { index } },
-		res
-	): Promise<void> => {
-		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(
-			res,
-			await this.service.fetchPalletsMiningSpeedBoostRatesTokenMiningById(index)
-		);
-  	};
-
-  	/**
-	 * GET Get MiningSpeedBoostRatesTokenMining count.
-	 *
-	 * @param req Express Request
-	 * @param res Express Response
-	 */
-	private getPalletsMiningSpeedBoostRatesTokenMiningCount: RequestHandler = async (
-    	{ query: { } },
-		res
-	): Promise<void> => {
-		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(
-			res,
-			await this.service.fetchPalletsMiningSpeedBoostRatesTokenMiningCount()
-		);
-  	};
 
 	/**
 	 * POST Create a MiningSpeedBoostRatesTokenMining.
@@ -78,4 +46,36 @@ export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends 
 			await this.service.createPalletsMiningSpeedBoostRatesTokenMining(tx)
 		);
 	};
+
+	/**
+	 * GET Get a MiningSpeedBoostRatesTokenMining by its index.
+	 *
+	 * @param req Express Request
+	 * @param res Express Response
+	 */
+	private getPalletsMiningSpeedBoostRatesTokenMiningById: RequestHandler<INumberParam> = async (
+		{ params: { index } },
+		res
+	): Promise<void> => {
+		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(
+			res,
+			await this.service.fetchPalletsMiningSpeedBoostRatesTokenMiningById(index)
+		);
+  	};
+
+  	/**
+	 * GET Get MiningSpeedBoostRatesTokenMining count.
+	 *
+	 * @param req Express Request
+	 * @param res Express Response
+	 */
+	private getPalletsMiningSpeedBoostRatesTokenMiningCount: RequestHandler = async (
+		{ query: { } },
+		res
+	): Promise<void> => {
+		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(
+			res,
+			await this.service.fetchPalletsMiningSpeedBoostRatesTokenMiningCount()
+		);
+  	};
 }

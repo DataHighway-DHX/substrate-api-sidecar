@@ -8,6 +8,13 @@ export interface ITx {
 	tx: string;
 }
 
+export interface ITxHardwareConfig {
+	hardware_mining_rates_id: string;
+	hardware_hardware_secure: string;
+	hardware_hardware_insecure: string;
+	hardware_max_hardware: string
+}
+
 /**
  * Post Request - assuming no url params
  */

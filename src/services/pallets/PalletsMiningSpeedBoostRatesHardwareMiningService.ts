@@ -2,6 +2,7 @@ import {
   	IPalletMiningSpeedBoostRatesHardwareMining,
 } from 'src/types/responses';
 
+// import { ITxHardwareConfig } from '../../types/requests';
 import { AbstractService } from '../AbstractService';
 import { extractCauseAndStack } from '../transaction/extractCauseAndStack';
 
@@ -19,7 +20,7 @@ export class PalletsMiningSpeedBoostRatesHardwareMiningService extends AbstractS
 		return {
 			hash
 		};
-  }
+	}
 
 	async fetchPalletsMiningSpeedBoostRatesHardwareMiningCount(): Promise<IPalletMiningSpeedBoostRatesHardwareMining> {
 		let hash;
@@ -76,4 +77,61 @@ export class PalletsMiningSpeedBoostRatesHardwareMiningService extends AbstractS
 			};
 		}
 	}
+
+
+	/**
+	 * Submit a fully formed SCALE-encoded extrinsic for block inclusion.
+	 *
+	 * @param extrinsic scale encoded extrinsic to submit
+	 */
+	async createConfigPalletsMiningSpeedBoostRatesHardwareMining(args: string): Promise<any> {
+		const { api } = this;
+
+		let tx;
+
+		try {
+			tx = api.tx(args);
+		} catch (err) {
+			const { cause, stack } = extractCauseAndStack(err);
+
+			throw {
+				error: 'Failed to parse transaction.',
+				args,
+				cause,
+				stack,
+			};
+		}
+
+		try {
+			const hash = await api.rpc.author.submitExtrinsic(tx);
+
+			return {
+				hash,
+			};
+		} catch (err) {
+			const { cause, stack } = extractCauseAndStack(err);
+
+			throw {
+				error: 'Failed to submit transaction.',
+				args,
+				cause,
+				stack,
+			};
+		}
+	}
+
+	async fetchPalletsMiningSpeedBoostRatesHardwareMiningConfigById(index: string): Promise<IPalletMiningSpeedBoostRatesHardwareMining> {
+		let hash;
+		try {
+			hash = await this.api.query
+				.dataHighwayMiningSpeedBoostRatesHardwareMining
+				.miningSpeedBoostRatesHardwareMiningRatesConfigs(index);
+		} catch {
+			hash = 'Cannot query miningSpeedBoostRatesHardwareMiningRatesConfigs from node.';
+		}
+
+		return {
+			hash
+		};
+  	}
 }
