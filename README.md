@@ -228,6 +228,17 @@ curl -X POST "http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardwa
 curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/0 | jq
 ```
 
+```
+curl -X POST "http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/0/configs/create" \
+        -H  "accept: application/json" \
+        -H "Content-Type: application/json" \
+        -d '{"hardware_mining_rates_id": "0",
+             "hardware_hardware_secure": "1",
+             "hardware_hardware_insecure": "1",
+             "hardware_max_hardware": "1"}'
+curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/configs/0 | jq
+```
+
 Note: The actual tx fee is larger than the estimated tx fee by ~0.6%, see [Actual vs Estimated Tx Fee](./TRANSACTION_FEE_COMPARE.md)
 
 ### Running
