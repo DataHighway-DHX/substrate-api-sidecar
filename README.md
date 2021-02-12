@@ -228,16 +228,27 @@ curl -X POST "http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardwa
 curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/0 | jq
 ```
 
+Now create a "config" for the new token mining rate at https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fspreehafen.datahighway.com#/extrinsics. Uncheck "Sign and Submit", enter a Nonce that is larger than the last shown. click "Sign". Copy the unsigned transaction hash and paste below. Alternatively just sign the transaction and submit it there if you do not want to do it separately with cURL.
+
 ```
 curl -X POST "http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/0/configs/create" \
         -H  "accept: application/json" \
         -H "Content-Type: application/json" \
-        -d '{"hardware_mining_rates_id": "0",
-             "hardware_hardware_secure": "1",
-             "hardware_hardware_insecure": "1",
-             "hardware_max_hardware": "1"}'
-curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/configs/0 | jq
+        -d '{"tx": "0xfd01846c029e6fc41ec44d420030071f04995bac19e59a0f0a1a610f9f0f6d689e2262018a849860bba75e7ae49f93bc37bb6ce04446097a3603fca4a75db0c274a66e7cc2951c4ce2953082c586d3d8570e1ead1a7ac54c10cd70470ea83329c052138755022c0020020000000000000000010200000001010000000101000000"}'
+
+curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-mining/0/config | jq
+
+// terminal output
+{
+  "hash": {
+    "hardware_hardware_secure": "2",
+    "hardware_hardware_insecure": "1",
+    "hardware_max_hardware": "1"
+  }
+}
 ```
+
+
 
 Note: The actual tx fee is larger than the estimated tx fee by ~0.6%, see [Actual vs Estimated Tx Fee](./TRANSACTION_FEE_COMPARE.md)
 

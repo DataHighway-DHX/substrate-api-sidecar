@@ -2,11 +2,7 @@ import {
   	IPalletMiningSpeedBoostRatesHardwareMining,
 } from 'src/types/responses';
 
-import { createPair } from '@polkadot/keyring/pair';
-import { createTestKeyring } from '@polkadot/keyring/testing';
-import { hexToU8a } from '@polkadot/util';
-
-import { ITxHardwareConfig } from '../../types/requests';
+// import { ITxHardwareConfig } from '../../types/requests';
 import { AbstractService } from '../AbstractService';
 import { extractCauseAndStack } from '../transaction/extractCauseAndStack';
 
@@ -24,7 +20,7 @@ export class PalletsMiningSpeedBoostRatesHardwareMiningService extends AbstractS
 		return {
 			hash
 		};
-  }
+  	}
 
 	async fetchPalletsMiningSpeedBoostRatesHardwareMiningCount(): Promise<IPalletMiningSpeedBoostRatesHardwareMining> {
 		let hash;
@@ -88,32 +84,15 @@ export class PalletsMiningSpeedBoostRatesHardwareMiningService extends AbstractS
 	 *
 	 * @param extrinsic scale encoded extrinsic to submit
 	 */
-	async createConfigPalletsMiningSpeedBoostRatesHardwareMiningForId(args: ITxHardwareConfig): Promise<any> {
+	async createConfigPalletsMiningSpeedBoostRatesHardwareMiningForId(args: string): Promise<any> {
+		console.log('args', args)
+		
 		const { api } = this;
 
 		let tx;
 
-		const keyring = createTestKeyring({ type: 'ed25519' });
-		const aliceEd = keyring.addPair(
-		  // eslint-disable-next-line @typescript-eslint/unbound-method
-		  createPair({ toSS58: keyring.encodeAddress, type: 'ed25519' }, {
-			publicKey: hexToU8a('0x88dc3417d5058ec4b4503e0c12ea1a0a89be200fe98922423d4334014fa6b0ee'),
-			secretKey: hexToU8a('0xabf8e5bdbe30c65656c0a3cbd181ff8a56294a69dfedd27982aace4a7690911588dc3417d5058ec4b4503e0c12ea1a0a89be200fe98922423d4334014fa6b0ee')
-		  })
-		);
-
 		try {
-			// https://polkadot.js.org/docs/api/cookbook/tx
-			tx = await api.tx
-				.dataHighwayMiningSpeedBoostSamplingHardwareMining
-				.setMiningSpeedBoostsSamplingsHardwareMiningSamplingsConfig(
-					args.hardware_mining_rates_id,
-					args.hardware_hardware_secure,
-					args.hardware_hardware_insecure,
-					args.hardware_max_hardware
-				)
-				.signAsync(aliceEd.address, {})
-
+			tx = api.tx(args);
 		} catch (err) {
 			const { cause, stack } = extractCauseAndStack(err);
 
@@ -142,4 +121,19 @@ export class PalletsMiningSpeedBoostRatesHardwareMiningService extends AbstractS
 			};
 		}
 	}
+
+	async fetchPalletsMiningSpeedBoostRatesHardwareMiningConfigById(index: string): Promise<IPalletMiningSpeedBoostRatesHardwareMining> {
+		let hash;
+		try {
+			hash = await this.api.query
+				.dataHighwayMiningSpeedBoostRatesHardwareMining
+				.miningSpeedBoostRatesHardwareMiningRatesConfigs(index);
+		} catch {
+			hash = 'Cannot query miningSpeedBoostRatesHardwareMiningRatesConfigs from node.';
+		}
+
+		return {
+			hash
+		};
+  	}
 }

@@ -2,7 +2,7 @@ import { ApiPromise } from '@polkadot/api';
 import { RequestHandler } from 'express';
 
 import { PalletsMiningSpeedBoostRatesHardwareMiningService } from '../../services';
-import { INumberParam, IPostRequestHandler, ITx, ITxHardwareConfig } from '../../types/requests';
+import { INumberParam, IPostRequestHandler, ITx } from '../../types/requests';
 import AbstractController from '../AbstractController';
 
 export default class PalletsMiningSpeedBoostRatesHardwareMiningsController extends AbstractController<PalletsMiningSpeedBoostRatesHardwareMiningService> {
@@ -17,6 +17,7 @@ export default class PalletsMiningSpeedBoostRatesHardwareMiningsController exten
 		this.safeMountAsyncGetHandlers([
 			['/:index', this.getPalletsMiningSpeedBoostRatesHardwareMiningById],
 			['/count', this.getPalletsMiningSpeedBoostRatesHardwareMiningCount],
+			['/:index/config', this.getPalletsMiningSpeedBoostRatesHardwareMiningConfigById],
 		]);
 		// POST
 		this.router.post(
@@ -61,7 +62,7 @@ export default class PalletsMiningSpeedBoostRatesHardwareMiningsController exten
 			res,
 			await this.service.fetchPalletsMiningSpeedBoostRatesHardwareMiningCount()
 		);
-  	};
+	  };
 
 	/**
 	 * POST Create a MiningSpeedBoostRatesHardwareMining.
@@ -90,30 +91,36 @@ export default class PalletsMiningSpeedBoostRatesHardwareMiningsController exten
 	 * @param req Express Request
 	 * @param res Express Response
 	 */
-	private createConfigPalletsMiningSpeedBoostRatesHardwareMiningForId: IPostRequestHandler<ITxHardwareConfig> = async (
-		{ body: { 
-			hardware_mining_rates_id,
-			hardware_hardware_secure,
-			hardware_hardware_insecure,
-			hardware_max_hardware
-		 } },
+	private createConfigPalletsMiningSpeedBoostRatesHardwareMiningForId: IPostRequestHandler<ITx> = async (
+		{ body: { tx }, params: { } },
 		res
 	): Promise<void> => {
-		if (!hardware_mining_rates_id && !hardware_hardware_secure && !hardware_hardware_secure && !hardware_hardware_secure) {
+		if (!tx) {
 			throw {
 				error: 'Missing field on request body.',
 			};
 		}
-		const args: ITxHardwareConfig = {
-			hardware_mining_rates_id,
-			hardware_hardware_secure,
-			hardware_hardware_insecure,
-			hardware_max_hardware
-		};
+		// console.log('params index that is used in the unsigned tx', index);
 
 		PalletsMiningSpeedBoostRatesHardwareMiningsController.sanitizedSend(
 			res,
-			await this.service.createConfigPalletsMiningSpeedBoostRatesHardwareMiningForId(args)
+			await this.service.createConfigPalletsMiningSpeedBoostRatesHardwareMiningForId(tx)
 		);
 	};
+
+	/**
+	 * GET Get a MiningSpeedBoostRatesHardwareMiningConfig by its index.
+	 *
+	 * @param req Express Request
+	 * @param res Express Response
+	 */
+	private getPalletsMiningSpeedBoostRatesHardwareMiningConfigById: RequestHandler<INumberParam> = async (
+    	{ params: { index } },
+		res
+	): Promise<void> => {
+		PalletsMiningSpeedBoostRatesHardwareMiningsController.sanitizedSend(
+			res,
+			await this.service.fetchPalletsMiningSpeedBoostRatesHardwareMiningConfigById(index)
+		);
+  	};
 }
