@@ -245,13 +245,14 @@ curl -s http://0.0.0.0:8080/pallets/mining/mining-speed-boost/rates/hardware-min
 {
   "hash": {
     "hardware_hardware_secure": "2",
-    "hardware_hardware_insecure": "1",
-    "hardware_max_hardware": "1"
+    "hardware_hardware_insecure": "1.5",
+    "hardware_max_hardware": "1.25",
+    "hardware_hardware_secure_max_token_bonus_per_gateway": "1000000",
+    "hardware_hardware_secure_max_token_bonus_per_gateway": "500000",
+    "hardware_hardware_secure_max_token_bonus_per_gateway": "250000",
   }
 }
 ```
-
-
 
 Note: The actual tx fee is larger than the estimated tx fee by ~0.6%, see [Actual vs Estimated Tx Fee](./TRANSACTION_FEE_COMPARE.md)
 
