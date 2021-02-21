@@ -21,6 +21,7 @@ import * as apps from '@polkadot/apps-config/api';
 import { WsProvider } from '@polkadot/rpc-provider';
 import { OverrideBundleType, RegistryTypes } from '@polkadot/types/types';
 import { json } from 'express';
+import * as cors from 'cors';
 
 import App from './App';
 import { getControllersForSpec } from './chains-config';
@@ -69,7 +70,11 @@ async function main() {
 
 	// Create our App
 	const app = new App({
-		preMiddleware: [json(), middleware.httpLoggerCreate(logger)],
+		preMiddleware: [
+			json(), 
+			middleware.httpLoggerCreate(logger),
+			cors(),
+		],
 		controllers: getControllersForSpec(api, specName.toString()),
 		postMiddleware: [
 			middleware.txError,

@@ -31,13 +31,35 @@ This service requires Node version 12 or higher.
 
 ## Table of contents
 
+- [Note](#note)
+- [Prerequisites](#prerequisites)
+- [Table of contents](#table-of-contents)
 - [NPM package installation and usage](#npm-package-installation-and-usage)
+  - [Global installation](#global-installation)
+  - [Local installation](#local-installation)
+  - [Finishing up](#finishing-up)
 - [Source code installation and usage](#source-code-installation-and-usage)
+  - [Quick install](#quick-install)
+  - [Rust development installation](#rust-development-installation)
+  - [Quickstart](#quickstart)
+    - [Swagger Docs](#swagger-docs)
+  - [Running](#running)
 - [Configuration](#configuration)
+  - [Express server](#express-server)
+  - [Substrate node](#substrate-node)
+    - [Custom substrate types](#custom-substrate-types)
+      - [Connecting a modified node template](#connecting-a-modified-node-template)
+  - [Logging](#logging)
+    - [Log levels](#log-levels)
+    - [RPC logging](#rpc-logging)
 - [Debugging fee and payout calculations](#debugging-fee-and-payout-calculations)
-- [Available endpoints](https://paritytech.github.io/substrate-api-sidecar/dist/)
-- [Chain integration guide](/CHAIN_INTEGRATION.md)
+- [Available endpoints](#available-endpoints)
+- [Chain integration guide](#chain-integration-guide)
 - [Docker](#docker)
+  - [Pull the latest release](#pull-the-latest-release)
+  - [Or build from source](#or-build-from-source)
+  - [Run](#run)
+- [Contribute](#contribute)
 - [Note for maintainers](#note-for-maintainers)
 
 ## NPM package installation and usage
@@ -109,17 +131,19 @@ Run a local DataHighway node in separate tab
 
 Ensure that in src/chains-config.index.ts the spec_name from the DataHighway repository's node runtime matches the name included in this file (e.g. `'datahighway': harbourTestnetControllers,`, where `'datahighway'` is the spec_name), otherwise it'll use the defaultController instead
 
-Swagger Docs
+---
+
+#### Swagger Docs
+
 ```
 cd docs/
 yarn
-yarn build
+yarn serve
 ```
 
-Open in browser this file (similar to https://paritytech.github.io/substrate-api-sidecar/dist/)
-```
-open -a "Google Chrome" ./docs/dist/index.html
-```
+Open in browser http://localhost:9000
+
+---
 
 Change the endpoint if necessary (e.g. `SAS_SUBSTRATE_WS_URL=ws://127.0.0.1:9944` or `SAS_SUBSTRATE_WS_URL=wss://spreehafen.datahighway.com` (standalone testnet) in .env.local)
 ```

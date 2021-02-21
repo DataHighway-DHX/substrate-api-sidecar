@@ -9,6 +9,9 @@ info:
     name: GPL-3.0-or-later
     url: https://github.com/paritytech/substrate-api-sidecar/blob/master/LICENSE
   version: 1.0.0-oas3
+servers:
+- url: http://127.0.0.1:8080/
+  description: Localhost
 tags:
 - name: accounts
 - name: blocks
@@ -781,7 +784,8 @@ paths:
         description: 'Index query the storage with'
         required: true
         schema:
-          type: stringoperationId: submitTransaction
+          type: string
+          stringoperationId: submitTransaction
       requestBody:
         $ref: '#/components/requestBodies/Transaction'
       responses:
