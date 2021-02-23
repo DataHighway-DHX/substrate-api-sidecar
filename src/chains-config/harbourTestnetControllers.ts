@@ -13,7 +13,7 @@ export const harbourTestnetControllers: ControllerConfig = {
 		AccountsVestingInfo: true,
 		NodeNetwork: true,
 		NodeVersion: true,
-    	NodeTransactionPool: true,
+		NodeTransactionPool: true,
 		RuntimeCode: true,
 		RuntimeSpec: true,
 		RuntimeMetadata: true,

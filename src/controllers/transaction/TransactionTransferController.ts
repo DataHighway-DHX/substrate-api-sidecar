@@ -1,4 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
+
 import { checkAddress } from '../../middleware/validate/validateAddressMiddleware';
 import { TransactionTransferService } from '../../services/transaction/TransactionTransferBalanceService';
 import { IAddressParam, IPostRequestHandler } from '../../types/requests';
@@ -18,7 +19,7 @@ export default class TransactionTransferController extends AbstractController<Tr
 		this.router.post(
 			this.path,
 			TransactionTransferController.catchWrap(this.transfer)
-		)
+		);
 	}
 
 	/**
@@ -32,7 +33,11 @@ export default class TransactionTransferController extends AbstractController<Tr
 		res
 	): Promise<void> => {
 		const parsedAmount = Number.parseFloat(amount?.toString() ?? '-1');
-		if (parsedAmount < 0 || !Number.isFinite(parsedAmount) || Number.isNaN(parsedAmount)) {
+		if (
+			parsedAmount < 0 ||
+			!Number.isFinite(parsedAmount) ||
+			Number.isNaN(parsedAmount)
+		) {
 			throw {
 				error: 'Amount is not valid. It must be > 0.',
 			};
@@ -57,10 +62,15 @@ export default class TransactionTransferController extends AbstractController<Tr
 				error: 'Secret is not valid.',
 			};
 		}
-				
+
 		TransactionTransferController.sanitizedSend(
 			res,
-			await this.service.transfer(secret, parsedAmount, 'dhx', parsedDestination),
+			await this.service.transfer(
+				secret,
+				parsedAmount,
+				'dhx',
+				parsedDestination
+			)
 		);
 	};
 }

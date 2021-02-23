@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
+import { Keyring } from '@polkadot/api';
 
 import { AbstractService } from '../AbstractService';
-import { Keyring } from '@polkadot/api';
 
 export class TransactionTransferService extends AbstractService {
 	/**
@@ -16,9 +16,9 @@ export class TransactionTransferService extends AbstractService {
 		secret: string,
 		amount: number,
 		token: string,
-		destination: string,
+		destination: string
 	): Promise<string> {
-		const api : ApiPromise = this.api;
+		const api: ApiPromise = this.api;
 		const keyring = new Keyring({ type: 'sr25519' });
 
 		if (token != 'dhx') {
@@ -28,11 +28,11 @@ export class TransactionTransferService extends AbstractService {
 		}
 
 		const sender = keyring.addFromUri(secret);
-		
+
 		const txHash = await api.tx.balances
 			.transfer(destination, amount)
 			.signAndSend(sender);
-			
+
 		return txHash.toString();
 	}
 }

@@ -7,10 +7,10 @@ import {
 import { Blocks, BlocksExtrinsics } from './blocks';
 import { NodeNetwork, NodeTransactionPool, NodeVersion } from './node';
 import {
-	PalletsMiningSpeedBoostRatesTokenMining,
 	PalletsMiningSpeedBoostRatesHardwareMining,
+	PalletsMiningSpeedBoostRatesTokenMining,
 	PalletsStakingProgress,
-	PalletsStorage
+	PalletsStorage,
 } from './pallets';
 import { RuntimeCode, RuntimeMetadata, RuntimeSpec } from './runtime';
 import {
