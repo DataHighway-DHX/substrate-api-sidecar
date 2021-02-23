@@ -18,6 +18,7 @@ export const kulupuControllers: ControllerConfig = {
 		TransactionMaterial: true,
 		TransactionFeeEstimate: true,
 		TransactionSubmit: true,
+		TransactionTransfer: true,
 		PalletsMiningSpeedBoostRatesTokenMining: false,
 		PalletsMiningSpeedBoostRatesHardwareMining: false,
 		PalletsStakingProgress: false,

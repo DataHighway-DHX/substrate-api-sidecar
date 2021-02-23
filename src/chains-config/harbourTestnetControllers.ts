@@ -21,6 +21,7 @@ export const harbourTestnetControllers: ControllerConfig = {
 		TransactionMaterial: true,
 		TransactionFeeEstimate: true,
 		TransactionSubmit: true,
+		TransactionTransfer: true,
 		PalletsMiningSpeedBoostRatesTokenMining: true,
 		PalletsMiningSpeedBoostRatesHardwareMining: true,
 		PalletsStakingProgress: true,

@@ -457,6 +457,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TransactionFailure'
+  /transaction/transfer:
+    post:
+      tags:
+      - transaction
+      summary: Transfer amounts to destination.
+      description: >-
+        Send amounts of `token` using passed `secret`
+      operationId: transferTransaction
+      requestBody:
+        $ref: '#/components/requestBodies/Transfer'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSuccess'
+        "500":
+          description: operation failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionFailure'
   /transaction/fee-estimate:
     post:
       tags:
@@ -636,7 +659,7 @@ paths:
       - transaction
       summary: Create token mining rate object in storage by submitting a transaction to the node's transaction pool.
       description: Accepts a valid signed extrinsic. Returns the hash of token mining rate object in storage.
-      operationId: submitTransaction
+      operationId: tokenMining
       requestBody:
         $ref: '#/components/requestBodies/Transaction'
       responses:
@@ -707,7 +730,7 @@ paths:
       - transaction
       summary: Create hardware mining rate object in storage by submitting a transaction to the node's transaction pool.
       description: Accepts a valid signed extrinsic. Returns the hash of hardware mining rate object in storage.
-      operationId: submitTransaction
+      operationId: hardwareMining
       requestBody:
         $ref: '#/components/requestBodies/Transaction'
       responses:
@@ -785,7 +808,6 @@ paths:
         required: true
         schema:
           type: string
-          stringoperationId: submitTransaction
       requestBody:
         $ref: '#/components/requestBodies/Transaction'
       responses:
@@ -1781,7 +1803,7 @@ components:
         stack:
           type: string
     PalletMiningSpeedBoostRatesTokenMinings:
-      type: array
+      type: object
       properties:
         miningSpeedBoostRatesTokenMinings:
           type: object
@@ -1894,4 +1916,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Transaction'
+      required: true
+    Transfer:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              secret:
+                type: string
+                format: hex
+              amount:
+                type: number
+              token:
+                type: string
+              destination:
+                type: string
       required: true

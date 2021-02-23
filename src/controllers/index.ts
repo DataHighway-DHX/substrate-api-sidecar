@@ -18,6 +18,7 @@ import {
 	TransactionFeeEstimate,
 	TransactionMaterial,
 	TransactionSubmit,
+	TransactionTransfer,
 } from './transaction';
 
 /**
@@ -44,4 +45,5 @@ export const controllers = {
 	TransactionFeeEstimate,
 	TransactionMaterial,
 	TransactionSubmit,
+	TransactionTransfer,
 };
