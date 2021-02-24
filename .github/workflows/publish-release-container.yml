@@ -17,7 +17,7 @@ jobs:
           - latest
           - ${{ github.event.release.tag_name }}
     env:
-      REGISTRY:                   docker.io/parity
+      REGISTRY:                   docker.io/dhxdocker
       IMAGE_NAME:                 substrate-api-sidecar
       VERSION:                    ${{ github.event.release.tag_name }}
 
