@@ -1,39 +1,40 @@
-import {
-  	IPalletMiningSpeedBoostRatesHardwareMining,
-} from 'src/types/responses';
+import { Hash } from '@polkadot/types/interfaces/runtime';
+import { IPalletMiningSpeedBoostRatesHardwareMining } from 'src/types/responses';
 
 // import { ITxHardwareConfig } from '../../types/requests';
 import { AbstractService } from '../AbstractService';
 import { extractCauseAndStack } from '../transaction/extractCauseAndStack';
 
 export class PalletsMiningSpeedBoostRatesHardwareMiningService extends AbstractService {
-	async fetchPalletsMiningSpeedBoostRatesHardwareMiningById(index: string): Promise<IPalletMiningSpeedBoostRatesHardwareMining> {
+	async fetchPalletsMiningSpeedBoostRatesHardwareMiningById(
+		index: string
+	): Promise<IPalletMiningSpeedBoostRatesHardwareMining> {
 		let hash;
 		try {
-			hash = await this.api.query
-				.dataHighwayMiningSpeedBoostRatesHardwareMining
-				.miningSpeedBoostRatesHardwareMinings(index);
+			hash = await this.api.query.dataHighwayMiningSpeedBoostRatesHardwareMining.miningSpeedBoostRatesHardwareMinings(
+				index
+			);
 		} catch {
-			hash = 'Cannot query miningSpeedBoostRatesHardwareMinings from node.';
+			hash =
+				'Cannot query miningSpeedBoostRatesHardwareMinings from node.';
 		}
 
 		return {
-			hash
+			hash,
 		};
 	}
 
 	async fetchPalletsMiningSpeedBoostRatesHardwareMiningCount(): Promise<IPalletMiningSpeedBoostRatesHardwareMining> {
 		let hash;
 		try {
-			hash = await this.api.query
-				.dataHighwayMiningSpeedBoostRatesHardwareMining
-				.miningSpeedBoostRatesHardwareMiningCount();
+			hash = await this.api.query.dataHighwayMiningSpeedBoostRatesHardwareMining.miningSpeedBoostRatesHardwareMiningCount();
 		} catch {
-			hash = 'Cannot query miningSpeedBoostRatesHardwareMiningCount from node.';
+			hash =
+				'Cannot query miningSpeedBoostRatesHardwareMiningCount from node.';
 		}
 
 		return {
-			hash
+			hash,
 		};
 	}
 
@@ -42,7 +43,9 @@ export class PalletsMiningSpeedBoostRatesHardwareMiningService extends AbstractS
 	 *
 	 * @param extrinsic scale encoded extrinsic to submit
 	 */
-	async createPalletsMiningSpeedBoostRatesHardwareMining(transaction: string): Promise<IPalletMiningSpeedBoostRatesHardwareMining> {
+	async createPalletsMiningSpeedBoostRatesHardwareMining(
+		transaction: string
+	): Promise<IPalletMiningSpeedBoostRatesHardwareMining> {
 		const { api } = this;
 
 		let tx;
@@ -78,13 +81,14 @@ export class PalletsMiningSpeedBoostRatesHardwareMiningService extends AbstractS
 		}
 	}
 
-
 	/**
 	 * Submit a fully formed SCALE-encoded extrinsic for block inclusion.
 	 *
 	 * @param extrinsic scale encoded extrinsic to submit
 	 */
-	async createConfigPalletsMiningSpeedBoostRatesHardwareMining(args: string): Promise<any> {
+	async createConfigPalletsMiningSpeedBoostRatesHardwareMining(
+		args: string
+	): Promise<{ hash: Hash }> {
 		const { api } = this;
 
 		let tx;
@@ -120,18 +124,21 @@ export class PalletsMiningSpeedBoostRatesHardwareMiningService extends AbstractS
 		}
 	}
 
-	async fetchPalletsMiningSpeedBoostRatesHardwareMiningConfigById(index: string): Promise<IPalletMiningSpeedBoostRatesHardwareMining> {
+	async fetchPalletsMiningSpeedBoostRatesHardwareMiningConfigById(
+		index: string
+	): Promise<IPalletMiningSpeedBoostRatesHardwareMining> {
 		let hash;
 		try {
-			hash = await this.api.query
-				.dataHighwayMiningSpeedBoostRatesHardwareMining
-				.miningSpeedBoostRatesHardwareMiningRatesConfigs(index);
+			hash = await this.api.query.dataHighwayMiningSpeedBoostRatesHardwareMining.miningSpeedBoostRatesHardwareMiningRatesConfigs(
+				index
+			);
 		} catch {
-			hash = 'Cannot query miningSpeedBoostRatesHardwareMiningRatesConfigs from node.';
+			hash =
+				'Cannot query miningSpeedBoostRatesHardwareMiningRatesConfigs from node.';
 		}
 
 		return {
-			hash
+			hash,
 		};
-  	}
+	}
 }

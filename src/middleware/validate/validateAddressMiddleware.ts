@@ -29,7 +29,7 @@ export const validateAddressMiddleware: RequestHandler = (req, _res, next) => {
  *
  * @param address potential ss58 address
  */
-function checkAddress(address: string): [boolean, string | undefined] {
+export function checkAddress(address: string): [boolean, string | undefined] {
 	let decoded;
 
 	try {

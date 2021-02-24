@@ -1,38 +1,37 @@
-import {
-  	IPalletMiningSpeedBoostRatesTokenMining,
-} from 'src/types/responses';
+import { IPalletMiningSpeedBoostRatesTokenMining } from 'src/types/responses';
 
 import { AbstractService } from '../AbstractService';
 import { extractCauseAndStack } from '../transaction/extractCauseAndStack';
 
 export class PalletsMiningSpeedBoostRatesTokenMiningService extends AbstractService {
-	async fetchPalletsMiningSpeedBoostRatesTokenMiningById(index: string): Promise<IPalletMiningSpeedBoostRatesTokenMining> {
+	async fetchPalletsMiningSpeedBoostRatesTokenMiningById(
+		index: string
+	): Promise<IPalletMiningSpeedBoostRatesTokenMining> {
 		let hash;
 		try {
-			hash = await this.api.query
-				.dataHighwayMiningSpeedBoostRatesTokenMining
-				.miningSpeedBoostRatesTokenMinings(index);
+			hash = await this.api.query.dataHighwayMiningSpeedBoostRatesTokenMining.miningSpeedBoostRatesTokenMinings(
+				index
+			);
 		} catch {
 			hash = 'Cannot query miningSpeedBoostRatesTokenMinings from node.';
 		}
 
 		return {
-			hash
+			hash,
 		};
-  }
+	}
 
 	async fetchPalletsMiningSpeedBoostRatesTokenMiningCount(): Promise<IPalletMiningSpeedBoostRatesTokenMining> {
 		let hash;
 		try {
-			hash = await this.api.query
-				.dataHighwayMiningSpeedBoostRatesTokenMining
-				.miningSpeedBoostRatesTokenMiningCount();
+			hash = await this.api.query.dataHighwayMiningSpeedBoostRatesTokenMining.miningSpeedBoostRatesTokenMiningCount();
 		} catch {
-			hash = 'Cannot query miningSpeedBoostRatesTokenMiningCount from node.';
+			hash =
+				'Cannot query miningSpeedBoostRatesTokenMiningCount from node.';
 		}
 
 		return {
-			hash
+			hash,
 		};
 	}
 
@@ -41,7 +40,9 @@ export class PalletsMiningSpeedBoostRatesTokenMiningService extends AbstractServ
 	 *
 	 * @param extrinsic scale encoded extrinsic to submit
 	 */
-	async createPalletsMiningSpeedBoostRatesTokenMining(transaction: string): Promise<IPalletMiningSpeedBoostRatesTokenMining> {
+	async createPalletsMiningSpeedBoostRatesTokenMining(
+		transaction: string
+	): Promise<IPalletMiningSpeedBoostRatesTokenMining> {
 		const { api } = this;
 
 		let tx;

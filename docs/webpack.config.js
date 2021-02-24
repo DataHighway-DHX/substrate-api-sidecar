@@ -46,4 +46,9 @@ module.exports = {
     filename: '[name].bundle.js',
     path: outputPath,
   },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9000,
+  },
 };

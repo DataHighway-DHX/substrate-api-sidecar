@@ -14,7 +14,7 @@ import { mandalaControllers } from './mandalaControllers';
 const specToControllerMap = {
 	kulupu: kulupuControllers,
 	mandala: mandalaControllers,
-	'datahighway': harbourTestnetControllers, // obtain this from `spec_name` in DataHighway repository's node runtime 
+	datahighway: harbourTestnetControllers, // obtain this from `spec_name` in DataHighway repository's node runtime
 	'dock-testnet': dockTestnetControllers,
 	'dock-main-runtime': dockMainnetControllers,
 };

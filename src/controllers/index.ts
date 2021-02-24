@@ -7,17 +7,23 @@ import {
 import { Blocks, BlocksExtrinsics } from './blocks';
 import { NodeNetwork, NodeTransactionPool, NodeVersion } from './node';
 import {
-	PalletsMiningSpeedBoostRatesTokenMining,
 	PalletsMiningSpeedBoostRatesHardwareMining,
+	PalletsMiningSpeedBoostRatesTokenMining,
 	PalletsStakingProgress,
-	PalletsStorage
+	PalletsStorage,
 } from './pallets';
 import { RuntimeCode, RuntimeMetadata, RuntimeSpec } from './runtime';
+import {
+	StakeBondController,
+	StakeBondExtraController,
+	StakeUnbondController,
+} from './stake';
 import {
 	TransactionDryRun,
 	TransactionFeeEstimate,
 	TransactionMaterial,
 	TransactionSubmit,
+	TransactionTransfer,
 } from './transaction';
 
 /**
@@ -44,4 +50,8 @@ export const controllers = {
 	TransactionFeeEstimate,
 	TransactionMaterial,
 	TransactionSubmit,
+	TransactionTransfer,
+	StakeBondController,
+	StakeBondExtraController,
+	StakeUnbondController,
 };
