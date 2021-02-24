@@ -7,28 +7,39 @@ import AbstractController from '../AbstractController';
 
 export default class PalletsMiningSpeedBoostRatesHardwareMiningsController extends AbstractController<PalletsMiningSpeedBoostRatesHardwareMiningService> {
 	constructor(api: ApiPromise) {
-		super(api, '/pallets/mining/mining-speed-boost/rates/hardware-mining',
-		new PalletsMiningSpeedBoostRatesHardwareMiningService(api));
+		super(
+			api,
+			'/pallets/mining/mining-speed-boost/rates/hardware-mining',
+			new PalletsMiningSpeedBoostRatesHardwareMiningService(api)
+		);
 		this.initRoutes();
 	}
 
 	protected initRoutes(): void {
 		// GET
 		this.safeMountAsyncGetHandlers([
-			['/:index/show', this.getPalletsMiningSpeedBoostRatesHardwareMiningById],
+			[
+				'/:index/show',
+				this.getPalletsMiningSpeedBoostRatesHardwareMiningById,
+			],
 			['/count', this.getPalletsMiningSpeedBoostRatesHardwareMiningCount],
-			['/:index/config/show', this.getPalletsMiningSpeedBoostRatesHardwareMiningConfigById],
+			[
+				'/:index/config/show',
+				this.getPalletsMiningSpeedBoostRatesHardwareMiningConfigById,
+			],
 		]);
 		// POST
 		this.router.post(
 			`${this.path}/create`,
-			PalletsMiningSpeedBoostRatesHardwareMiningsController
-				.catchWrap(this.createPalletsMiningSpeedBoostRatesHardwareMining)
+			PalletsMiningSpeedBoostRatesHardwareMiningsController.catchWrap(
+				this.createPalletsMiningSpeedBoostRatesHardwareMining
+			)
 		);
 		this.router.post(
 			`${this.path}/:index/config/create`,
-			PalletsMiningSpeedBoostRatesHardwareMiningsController
-				.catchWrap(this.createConfigPalletsMiningSpeedBoostRatesHardwareMining)
+			PalletsMiningSpeedBoostRatesHardwareMiningsController.catchWrap(
+				this.createConfigPalletsMiningSpeedBoostRatesHardwareMining
+			)
 		);
 	}
 
@@ -49,7 +60,9 @@ export default class PalletsMiningSpeedBoostRatesHardwareMiningsController exten
 		}
 		PalletsMiningSpeedBoostRatesHardwareMiningsController.sanitizedSend(
 			res,
-			await this.service.createPalletsMiningSpeedBoostRatesHardwareMining(tx)
+			await this.service.createPalletsMiningSpeedBoostRatesHardwareMining(
+				tx
+			)
 		);
 	};
 
@@ -60,23 +73,25 @@ export default class PalletsMiningSpeedBoostRatesHardwareMiningsController exten
 	 * @param res Express Response
 	 */
 	private getPalletsMiningSpeedBoostRatesHardwareMiningById: RequestHandler<INumberParam> = async (
-    	{ params: { index } },
+		{ params: { index } },
 		res
 	): Promise<void> => {
 		PalletsMiningSpeedBoostRatesHardwareMiningsController.sanitizedSend(
 			res,
-			await this.service.fetchPalletsMiningSpeedBoostRatesHardwareMiningById(index)
+			await this.service.fetchPalletsMiningSpeedBoostRatesHardwareMiningById(
+				index
+			)
 		);
-  	};
+	};
 
-  	/**
+	/**
 	 * GET Get MiningSpeedBoostRatesHardwareMining count.
 	 *
 	 * @param req Express Request
 	 * @param res Express Response
 	 */
 	private getPalletsMiningSpeedBoostRatesHardwareMiningCount: RequestHandler = async (
-    	{ query: { } },
+		_,
 		res
 	): Promise<void> => {
 		PalletsMiningSpeedBoostRatesHardwareMiningsController.sanitizedSend(
@@ -104,7 +119,9 @@ export default class PalletsMiningSpeedBoostRatesHardwareMiningsController exten
 
 		PalletsMiningSpeedBoostRatesHardwareMiningsController.sanitizedSend(
 			res,
-			await this.service.createConfigPalletsMiningSpeedBoostRatesHardwareMining(tx)
+			await this.service.createConfigPalletsMiningSpeedBoostRatesHardwareMining(
+				tx
+			)
 		);
 	};
 
@@ -115,12 +132,14 @@ export default class PalletsMiningSpeedBoostRatesHardwareMiningsController exten
 	 * @param res Express Response
 	 */
 	private getPalletsMiningSpeedBoostRatesHardwareMiningConfigById: RequestHandler<INumberParam> = async (
-    	{ params: { index } },
+		{ params: { index } },
 		res
 	): Promise<void> => {
 		PalletsMiningSpeedBoostRatesHardwareMiningsController.sanitizedSend(
 			res,
-			await this.service.fetchPalletsMiningSpeedBoostRatesHardwareMiningConfigById(index)
+			await this.service.fetchPalletsMiningSpeedBoostRatesHardwareMiningConfigById(
+				index
+			)
 		);
-  	};
+	};
 }

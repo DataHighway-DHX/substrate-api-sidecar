@@ -7,22 +7,29 @@ import AbstractController from '../AbstractController';
 
 export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends AbstractController<PalletsMiningSpeedBoostRatesTokenMiningService> {
 	constructor(api: ApiPromise) {
-		super(api, '/pallets/mining/mining-speed-boost/rates/token-mining',
-		new PalletsMiningSpeedBoostRatesTokenMiningService(api));
+		super(
+			api,
+			'/pallets/mining/mining-speed-boost/rates/token-mining',
+			new PalletsMiningSpeedBoostRatesTokenMiningService(api)
+		);
 		this.initRoutes();
 	}
 
 	protected initRoutes(): void {
 		// GET
 		this.safeMountAsyncGetHandlers([
-			['/:index/show', this.getPalletsMiningSpeedBoostRatesTokenMiningById],
+			[
+				'/:index/show',
+				this.getPalletsMiningSpeedBoostRatesTokenMiningById,
+			],
 			['/count', this.getPalletsMiningSpeedBoostRatesTokenMiningCount],
 		]);
 		// POST
 		this.router.post(
 			`${this.path}/create`,
-			PalletsMiningSpeedBoostRatesTokenMiningsController
-				.catchWrap(this.createPalletsMiningSpeedBoostRatesTokenMining)
+			PalletsMiningSpeedBoostRatesTokenMiningsController.catchWrap(
+				this.createPalletsMiningSpeedBoostRatesTokenMining
+			)
 		);
 	}
 
@@ -59,23 +66,25 @@ export default class PalletsMiningSpeedBoostRatesTokenMiningsController extends 
 	): Promise<void> => {
 		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(
 			res,
-			await this.service.fetchPalletsMiningSpeedBoostRatesTokenMiningById(index)
+			await this.service.fetchPalletsMiningSpeedBoostRatesTokenMiningById(
+				index
+			)
 		);
-  	};
+	};
 
-  	/**
+	/**
 	 * GET Get MiningSpeedBoostRatesTokenMining count.
 	 *
 	 * @param req Express Request
 	 * @param res Express Response
 	 */
 	private getPalletsMiningSpeedBoostRatesTokenMiningCount: RequestHandler = async (
-		{ query: { } },
+		_,
 		res
 	): Promise<void> => {
 		PalletsMiningSpeedBoostRatesTokenMiningsController.sanitizedSend(
 			res,
 			await this.service.fetchPalletsMiningSpeedBoostRatesTokenMiningCount()
 		);
-  	};
+	};
 }

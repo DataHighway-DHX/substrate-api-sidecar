@@ -12,7 +12,7 @@ export interface ITxHardwareConfig {
 	hardware_mining_rates_id: string;
 	hardware_hardware_secure: string;
 	hardware_hardware_insecure: string;
-	hardware_max_hardware: string
+	hardware_max_hardware: string;
 }
 
 /**
