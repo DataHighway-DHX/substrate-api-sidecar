@@ -548,6 +548,101 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /pallets/staking/bond:
+    post:
+      tags:
+      - staking
+      - pallets
+      summary: Bond funds.
+      operationId: stakeBond
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                secret:
+                  type: string
+                  format: hex
+                amount:
+                  type: number
+                controller:
+                  type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSuccess'
+        "500":
+          description: operation failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionFailure'
+  /pallets/staking/bond-extra:
+    post:
+      tags:
+      - staking
+      - pallets
+      summary: Bond extra funds.
+      operationId: stakeBondExtra
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                secret:
+                  type: string
+                  format: hex
+                amount:
+                  type: number
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSuccess'
+        "500":
+          description: operation failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionFailure'
+  /pallets/staking/unbond:
+    post:
+      tags:
+      - staking
+      - pallets
+      summary: Unbond funds.
+      operationId: stakeUnbond
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                secret:
+                  type: string
+                  format: hex
+                amount:
+                  type: number
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSuccess'
+        "500":
+          description: operation failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionFailure'
   /pallets/staking/progress:
     get:
       tags:

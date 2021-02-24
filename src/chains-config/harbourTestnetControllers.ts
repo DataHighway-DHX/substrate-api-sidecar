@@ -26,6 +26,9 @@ export const harbourTestnetControllers: ControllerConfig = {
 		PalletsMiningSpeedBoostRatesHardwareMining: true,
 		PalletsStakingProgress: true,
 		PalletsStorage: true,
+		StakeBondController: true,
+		StakeBondExtraController: true,
+		StakeUnbondController: true,
 	},
 	options: {
 		finalizes: true,

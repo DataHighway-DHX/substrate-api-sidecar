@@ -14,6 +14,11 @@ import {
 } from './pallets';
 import { RuntimeCode, RuntimeMetadata, RuntimeSpec } from './runtime';
 import {
+	StakeBondController,
+	StakeBondExtraController,
+	StakeUnbondController,
+} from './stake';
+import {
 	TransactionDryRun,
 	TransactionFeeEstimate,
 	TransactionMaterial,
@@ -46,4 +51,7 @@ export const controllers = {
 	TransactionMaterial,
 	TransactionSubmit,
 	TransactionTransfer,
+	StakeBondController,
+	StakeBondExtraController,
+	StakeUnbondController,
 };

@@ -26,6 +26,9 @@ export const dockTestnetControllers: ControllerConfig = {
 		PalletsMiningSpeedBoostRatesHardwareMining: false,
 		PalletsStakingProgress: false,
 		PalletsStorage: true,
+		StakeBondController: true,
+		StakeBondExtraController: true,
+		StakeUnbondController: true,
 	},
 	options: {
 		finalizes: true,

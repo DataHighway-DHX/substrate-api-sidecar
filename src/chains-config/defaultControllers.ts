@@ -27,6 +27,9 @@ export const defaultControllers: ControllerConfig = {
 		PalletsMiningSpeedBoostRatesHardwareMining: true,
 		PalletsStakingProgress: true,
 		PalletsStorage: true,
+		StakeBondController: true,
+		StakeBondExtraController: true,
+		StakeUnbondController: true,
 	},
 	options: {
 		finalizes: true,

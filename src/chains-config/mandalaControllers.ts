@@ -26,6 +26,9 @@ export const mandalaControllers: ControllerConfig = {
 		PalletsMiningSpeedBoostRatesHardwareMining: false,
 		PalletsStakingProgress: true,
 		PalletsStorage: true,
+		StakeBondController: true,
+		StakeBondExtraController: true,
+		StakeUnbondController: true,
 	},
 	options: {
 		finalizes: true,
