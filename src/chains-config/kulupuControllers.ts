@@ -26,6 +26,8 @@ export const kulupuControllers: ControllerConfig = {
 		StakeBondController: true,
 		StakeBondExtraController: true,
 		StakeUnbondController: true,
+		StakeValidatorRewardController: true,
+		StakeElectedInfoController: true,
 	},
 	options: {
 		finalizes: false,

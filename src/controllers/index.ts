@@ -16,7 +16,9 @@ import { RuntimeCode, RuntimeMetadata, RuntimeSpec } from './runtime';
 import {
 	StakeBondController,
 	StakeBondExtraController,
+	StakeElectedInfoController,
 	StakeUnbondController,
+	StakeValidatorRewardController,
 } from './stake';
 import {
 	TransactionDryRun,
@@ -54,4 +56,6 @@ export const controllers = {
 	StakeBondController,
 	StakeBondExtraController,
 	StakeUnbondController,
+	StakeElectedInfoController,
+	StakeValidatorRewardController,
 };

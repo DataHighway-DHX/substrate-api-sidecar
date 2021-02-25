@@ -29,6 +29,8 @@ export const dockMainnetControllers: ControllerConfig = {
 		StakeBondController: true,
 		StakeBondExtraController: true,
 		StakeUnbondController: true,
+		StakeValidatorRewardController: true,
+		StakeElectedInfoController: true,
 	},
 	options: {
 		finalizes: true,

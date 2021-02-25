@@ -643,6 +643,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TransactionFailure'
+  /pallets/staking/elected-info:
+    get:
+      tags:
+      - staking
+      - pallets
+      summary: Get elected info & validators.
+      operationId: getElectedInfo
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+  /pallets/staking/validator-reward:
+    get:
+      tags:
+      - staking
+      - pallets
+      summary: Get validator reward info.
+      operationId: getValidatorReward
+      parameters:
+      - name: validatorId
+        in: query
+        required: true
+        type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
   /pallets/staking/progress:
     get:
       tags:
