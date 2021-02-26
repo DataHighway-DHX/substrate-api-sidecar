@@ -10,7 +10,7 @@ info:
     url: https://github.com/paritytech/substrate-api-sidecar/blob/master/LICENSE
   version: 1.0.0-oas3
 servers:
-- urk: https://sidecar.datahighway.com/
+- url: https://sidecar.datahighway.com/
   description: DataHighway Sidecar
 - url: http://127.0.0.1:8080/
   description: Localhost
